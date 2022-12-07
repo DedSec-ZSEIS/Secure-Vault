@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;400;500;600&display=swap'); */
+@font-face {
+  font-family: 'Default';
+  src: url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;400;500;600&display=swap');
+}
+
+@responsive {
+  .text-shadow {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.10);
+  }
+
+  .text-shadow-md {
+    text-shadow: 0 4px 8px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08);
+  }
+
+  .text-shadow-lg {
+    text-shadow: 0 15px 30px rgba(0,0,0,0.11), 0 5px 15px rgba(0,0,0,0.08);
+  }
+
+  .text-shadow-none {
+    text-shadow: none;
+  }
+}
+
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
+    background: white;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: white;
+    background: black;
+  }
+} */
+
+.splinewrapper {
+  background-image: url('../public/FormBackground.png');
+  background-size: cover;
+}
+
+.formwrapper::before{
+  content:'';
+  z-index: -1;
+  opacity: .25;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-image: linear-gradient(135deg, skyblue, white);
+  border-radius: 25px;
+  border: 1px solid white;
+}
+
+/* bg-gradient-to-r from-blue-100 to-white-900 */
+
+/* div, canvas {
+  outline: 1px solid black
+} */
+
+main{
+  background: rgb(237, 226, 255);
+  background-image: url('../public/HomepageVector.png');
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: bottom;
+}
