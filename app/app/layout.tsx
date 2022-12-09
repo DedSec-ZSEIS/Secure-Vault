@@ -1,5 +1,5 @@
 import './globals.css'
-import Navbar from '../comps/Navbar'
+import ThemeProvider from "../contexts/ThemeContext"
 
 export default function RootLayout({
   children,
@@ -14,10 +14,11 @@ export default function RootLayout({
       */}
       <head />
       <body>
-        <main>
-          
-          {children}
-        </main>
+        <div>
+          <ThemeProvider>
+            {children}
+          </ThemeProvider>
+        </div>
       </body>
     </html>
   )

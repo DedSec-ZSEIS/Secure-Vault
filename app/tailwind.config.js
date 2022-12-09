@@ -20,7 +20,13 @@ module.exports = {
       borderWidth: {
         '1': '1px',
       },
-    },
+      gridTemplateColumns: {
+        "dashboardLayout": '100px 1fr'
+      },
+      gridTemplateRows: {
+        "dashboardLayout": "96px 1fr"
+      }
+    }
   },
   plugins: [],
   darkMode: 'class' //can be changed to 'media'or 'class'

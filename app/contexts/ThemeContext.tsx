@@ -1,18 +1,30 @@
 "use client"
-import { useState, useContext, createContext } from "react"
+import { useState, createContext, useEffect,  } from "react"
 
-const ThemeContext = createContext(true)
+interface IThemeContext {
+  theme: string;
+  setTheme: any;
+}
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
-    const [darkTheme, setDarkTheme] = useState(true)
 
-    // const toggleTheme = () => {
-    //     setDarkTheme(prevDarkTheme => !prevDarkTheme)
-    // }
+export const ThemeContext = createContext({
+// theme: (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? "dark" : "light",
+// theme: "light",
+theme: "dark"
+} as IThemeContext)
+
+
+export default function ThemeProvider({ children } : { children: React.ReactNode }) {
+  const [theme, setTheme] = useState("light")
+  const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  useEffect(() => {
+    setTheme(isDarkMode ? "dark" : "light")
+  }, [isDarkMode])
+
 
   return (
     <>
-        <ThemeContext.Provider value={darkTheme}>
+        <ThemeContext.Provider value={{ theme, setTheme }}>
             {children}
         </ThemeContext.Provider>
     </>

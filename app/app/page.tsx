@@ -1,9 +1,13 @@
 import Navbar from "../comps/Navbar"
 import SplineHomepage from "../comps/SplineHomepage"
 
+
 export default function Home() {
+
+
+  
   return (
-    <>
+    <div className={'landing-page-main h-screen '}>
       <Navbar></Navbar>
       <div className="main-content grid grid-rows-1 grid-cols-2 h-max overflow-x-hidden">
         <header className="p-24">
@@ -15,6 +19,6 @@ export default function Home() {
           <SplineHomepage></SplineHomepage>
         </div>
       </div>
-    </>
+    </div>
   )
 }

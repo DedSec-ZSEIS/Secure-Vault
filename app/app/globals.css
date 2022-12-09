@@ -88,7 +88,7 @@ a {
   outline: 1px solid black
 } */
 
-main{
+.landing-page-main{
   background: rgb(237, 226, 255);
   background-image: url('../public/HomepageVector.png');
   background-size: 50%;
