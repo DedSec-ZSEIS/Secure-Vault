@@ -16,10 +16,10 @@ theme: "dark"
 
 export default function ThemeProvider({ children } : { children: React.ReactNode }) {
   const [theme, setTheme] = useState("light")
-  const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
   useEffect(() => {
+    const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
     setTheme(isDarkMode ? "dark" : "light")
-  }, [isDarkMode])
+  }, [])
 
 
   return (
