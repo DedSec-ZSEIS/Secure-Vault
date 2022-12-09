@@ -9,10 +9,21 @@ module.exports = {
     extend: {
       colors: {
         'primary-grey': '#E7EBF1',
-        'primary-blue' : "#5143FF",
         'dark-grey': "#292B2E",
         'md-grey': '#464A55',
         'light-grey': '#7E7E7E',
+
+        'primary-blue' : "#2196F3",
+        'primary-blue-half' : "#2196F350",
+        'light-blue': '#E3F2FD',
+        'primary-deepblue': '#212946',
+        'light-deepblue': '#29314f',
+        'dark-deepblue': '#111936',
+
+        'primary-deeppurple': '#673AB7',
+
+        'primary-yellow': '#FFC107',
+        'light-yellow': '#FFF8E1',
       },
       width: {
         '7/24': '32%',
@@ -25,6 +36,9 @@ module.exports = {
       },
       gridTemplateRows: {
         "dashboardLayout": "96px 1fr"
+      },
+      boxShadow: {
+        "headbar-button": "0 0 5px",
       }
     }
   },

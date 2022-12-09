@@ -1,37 +1,48 @@
 'use client'
 import { useContext } from "react"
-import { ThemeContext } from "../../contexts/ThemeContext"
-import { FaBeer } from 'react-icons/fa';
+import { ThemeContext } from "../../contexts/ThemeContext";
+import { BsMoonStars } from 'react-icons/bs';
+import { ImSun } from 'react-icons/im';
+import { MdMenuOpen } from 'react-icons/md';
+import personAvatar from '../../public/images/person-avatar.png';
+import Image from "next/image";
+import { MenuContext } from "../../contexts/MenuContext";
+import NavButton from "./NavButton";
 
 
 export default function Headbar() {
-    const { theme, setTheme } = useContext(ThemeContext)
+    const { theme, setTheme, isDarkMode, setIsDarkMode } = useContext(ThemeContext)
+    const { isMenuOpen, setIsMenuOpen } = useContext(MenuContext)
     
-    // useEffect(() => {
-    //     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    //         // dark mode
-    //         console.log('dark mode detected');
-    //     }
-    // }, [])
     
-    const handleClick = () => {
-        setTheme(theme === "light" ? "dark" : "light")
+    const handleClick = (name: string) => {
+        switch (name) {
+            case "darkMode":
+                setTheme(theme === "light" ? "dark" : "light")
+                setIsDarkMode(!isDarkMode)
+                break
+            case "menu":
+                setIsMenuOpen((prev: boolean) => !prev)
+                break
+            default:
+                break
+        }
     }
 
-// ${isInDarkmode ? "dark" : ""}  
+
     return (
-        <div className={`headbar bg-blue-700 flex items-center h-24 w-full shadow-lg relative text-white dark:text-black`}  style={{ gridArea: "headbar" }}>
-            {/* <div className="logo-wrapper m-10">
-                CKMK
-            </div> */}
+        <div className={`headbar dark:bg-primary-deepblue bg-white flex items-center h-24 w-full shadow-lg relative text-white`}  style={{ gridArea: "headbar" }}>
+            <NavButton 
+                icon={<MdMenuOpen />}
+            />
             <div className="right-side-options m-10 flex gap-8 items-center absolute right-0">
-                <div className="dark-mode-btn-div">
-                <button onClick={handleClick}>
-                    <FaBeer />
-                </button>
-                </div>
-                <div className="profile-avatar w-16 h-16 bg-black rounded-full p-2">
-                <button>avatar</button>
+                <NavButton 
+                    icon={isDarkMode ? <ImSun />  : <BsMoonStars />}
+                />
+                <div className="profile-avatar w-16 h-16 dark:bg-light-deepblue bg-light-blue hover:bg-primary-blue hover:dark:bg-primary-blue rounded-full ease-in duration-150 p-2 flex items-center justify-center">
+                    <button className="profile-avatar-btn w-full h-full bg-primary-purple rounded-full overflow-hidden">
+                        <Image src={personAvatar} alt="avatar" style={isMenuOpen ? {} : { transform: "scaleX(-1)" }}/>
+                    </button>
                 </div>
             </div>
         </div>

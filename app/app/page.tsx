@@ -3,8 +3,6 @@ import SplineHomepage from "../comps/SplineHomepage"
 
 
 export default function Home() {
-
-
   
   return (
     <div className={'landing-page-main h-screen '}>

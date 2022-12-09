@@ -1,5 +1,5 @@
 import './globals.css'
-import ThemeProvider from "../contexts/ThemeContext"
+import ContextProvider from '../contexts/Context'
 
 export default function RootLayout({
   children,
@@ -15,9 +15,9 @@ export default function RootLayout({
       <head />
       <body>
         <div>
-          <ThemeProvider>
+          <ContextProvider>
             {children}
-          </ThemeProvider>
+          </ContextProvider>
         </div>
       </body>
     </html>
