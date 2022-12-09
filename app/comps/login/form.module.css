@@ -1,0 +1,40 @@
+/* do usuniecia ramki zaznaczania */
+    .textarea:focus, .login:focus{
+        outline: none;
+        background-color: transparent;
+    }
+    .login:-webkit-autofill,
+    .login:-webkit-autofill:hover,
+    .login:-webkit-autofill:focus,
+    .login:-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s;
+    }
+    .lineAnimation {
+        display: inline-block;
+        position: relative;
+        
+    }
+    
+    .lineAnimation::after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background-color: #000;
+        transform-origin: bottom right;
+        transition: transform 0.25s ease-out;
+    }
+    
+    .lineAnimation:hover::after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+    }
+    
+    @media (prefers-color-scheme: dark) {
+        .lineAnimation::after {
+            background-color: #fff;
+        }
+    }
