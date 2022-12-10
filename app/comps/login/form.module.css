@@ -39,6 +39,12 @@
         }
     }
 
+    @media (prefers-color-scheme: light) {
+        .lineAnimation::after {
+            background-color: black;
+        }
+    }
+
 
     .wrapper::before{
         content: "";
