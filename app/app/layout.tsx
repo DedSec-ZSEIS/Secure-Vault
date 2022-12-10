@@ -14,7 +14,7 @@ export default function RootLayout({
       */}
       <head />
       <body>
-        <div>
+        <div className='dark'>
           <ContextProvider>
             {children}
           </ContextProvider>

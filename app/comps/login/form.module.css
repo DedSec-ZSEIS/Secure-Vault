@@ -9,32 +9,50 @@
     .login:-webkit-autofill:active {
         transition: background-color 5000s ease-in-out 0s;
     }
-    .lineAnimation {
+    .lineAnimation{
         display: inline-block;
         position: relative;
         
     }
-    
-    .lineAnimation::after {
+
+    .lineAnimation::after{
         content: '';
         position: absolute;
         width: 100%;
         transform: scaleX(0);
         height: 2px;
-        bottom: -5px;
+        bottom: -7px;
         left: 0;
-        background-color: #000;
+        background-color: white;
         transform-origin: bottom right;
         transition: transform 0.25s ease-out;
     }
-    
-    .lineAnimation:hover::after {
+
+    .lineAnimation:hover::after{
         transform: scaleX(1);
         transform-origin: bottom left;
     }
-    
+
     @media (prefers-color-scheme: dark) {
         .lineAnimation::after {
-            background-color: #fff;
+            background-color: white;
         }
+    }
+
+
+    .wrapper::before{
+        content: "";
+        width: 100%;
+        height: 100%;
+        background: rgb(131,58,180);
+        background: linear-gradient(30deg, rgba(131,58,180,1) 0%, rgba(29, 175, 253, 0.863) 25%, rgba(252, 69, 194, 0.89) 75%, rgba(131, 58, 180, 0.753) 100%);
+        position: absolute;
+        filter: blur(100px);
+        background-size: 200%;
+        animation: gradientAnim 5s ease-in-out infinite;
+    }
+
+    @keyframes gradientAnim {
+        0%,100%{background-position: 0%;}
+        50%{background-position: 100%;}
     }

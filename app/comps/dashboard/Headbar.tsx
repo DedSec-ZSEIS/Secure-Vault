@@ -38,6 +38,7 @@ export default function Headbar() {
             <div className="right-side-options m-10 flex gap-8 items-center absolute right-0">
                 <NavButton 
                     icon={isDarkMode ? <ImSun />  : <BsMoonStars />}
+                    customFunction={() => handleClick("darkMode")}
                 />
                 <div className="profile-avatar w-16 h-16 dark:bg-light-deepblue bg-light-blue hover:bg-primary-blue hover:dark:bg-primary-blue rounded-full ease-in duration-150 p-2 flex items-center justify-center">
                     <button className="profile-avatar-btn w-full h-full bg-primary-purple rounded-full overflow-hidden">
