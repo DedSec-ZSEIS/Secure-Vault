@@ -4,13 +4,13 @@ import React from 'react'
 import Form from '../../comps/login/Form'
 import  {MdOutlineLiveHelp}  from 'react-icons/md';
 import TechHelp from '../../comps/login/TechHelp';
-import styles from '../../comps/login/form.module.css'
-import { motion as m } from 'framer-motion'
+import styles from '../../comps/login/form.module.css';
+import { motion as m } from 'framer-motion';
 import {useState} from 'react';
 
 export default function page() {
 
-    const [isShow, setIsShow] = useState(true)
+    const [isShow, setIsShow] = useState(false)
     const toggle = () => setIsShow(!isShow);
 
 
@@ -35,8 +35,8 @@ export default function page() {
 
             </m.div>
             <m.div 
-                onClick={toggle}
-            className={'fixed w-screen h-screen  '}
+                // onClick={toggle}
+            className={'fixed w-screen h-screen '+ styles.help}
             animate={isShow ? 'show' : 'hide'}
             variants={{
                 show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100, damping: 20, mass: 1 } },
@@ -47,7 +47,13 @@ export default function page() {
 
             
             >
-                <TechHelp />
+                
+                    <div onClick={toggle} className='w-screen h-screen flex justify-center items-center '>
+                        {isShow && (<div className={"border-gray-500 border-2 rounded-3xl bg-white w-2/5 h-1/2 " + styles.help}>
+                                <TechHelp />
+                        </div>)}
+                    </div>
+                
             </m.div>
         </div>
     )
