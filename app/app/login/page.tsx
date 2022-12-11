@@ -52,12 +52,13 @@ export default function page() {
 
             
             >
-                
-                    <div onClick={toggle} className='w-screen h-screen flex justify-center items-center '>
-                        {isShow && (<div className={"border-gray-500 border-2 rounded-3xl bg-white w-2/5 h-1/2 " + styles.help}>
+                <div onClick={toggle}  className='fixed top-0 left-0 w-screen h-screen'></div>
+                    <div className='w-screen h-screen flex justify-center items-center '>
+                        {isShow && (<div className={"border-gray-500 border-2 rounded-3xl bg-white w-2/5 h-1/2 z-100" + styles.help}>
                                 <TechHelp />
                         </div>)}
                     </div>
+                    
                 
             </m.div>
         </div>
