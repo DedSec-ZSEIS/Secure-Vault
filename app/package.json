@@ -9,12 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/base": "^5.0.0-alpha.109",
+    "@mui/material": "^5.10.17",
+    "@mui/styled-engine-sc": "^5.10.16",
     "@splinetool/react-spline": "^2.2.3",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.8",
     "eslint": "8.27.0",
     "eslint-config-next": "13.0.3",
+    "framer-motion": "^7.6.19",
     "i18next": "^22.0.5",
     "js-sha512": "^0.8.0",
     "next": "13.0.3",
@@ -23,6 +29,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
     "spline": "^0.0.0",
+    "styled-components": "^5.3.6",
     "typescript": "4.8.4"
   },
   "devDependencies": {
