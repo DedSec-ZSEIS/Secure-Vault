@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 
 export default function techHelp() {
   return (
-    <div className={"border-gray-500 border-2 rounded-3xl bg-white w-2/5 h-1/2 fixed top-1/4  "+ styles.help}>
+    <div className={"border-gray-500 border-2 rounded-3xl bg-white w-2/5 h-1/2 "}>
             
             
             

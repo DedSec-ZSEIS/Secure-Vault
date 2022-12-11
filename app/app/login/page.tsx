@@ -10,7 +10,7 @@ import {useState} from 'react';
 
 export default function page() {
 
-    const [isShow, setIsShow] = useState(true)
+    const [isShow, setIsShow] = useState(false)
     const toggle = () => setIsShow(!isShow);
 
 
@@ -36,7 +36,7 @@ export default function page() {
             </m.div>
             <m.div 
                 onClick={toggle}
-            className={'fixed w-screen h-screen  '}
+            className={'fixed w-screen h-screen top-1/4  '+ styles.help}
             animate={isShow ? 'show' : 'hide'}
             variants={{
                 show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100, damping: 20, mass: 1 } },
