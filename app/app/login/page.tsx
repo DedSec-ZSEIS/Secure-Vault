@@ -35,8 +35,13 @@ export default function page() {
 
             </m.div>
             <m.div 
-                // onClick={toggle}
-            className={'fixed w-screen h-screen '+ styles.help}
+
+            onClick={toggle}
+        className={'fixed w-screen h-screen top-1/4  '+ styles.help}
+
+            
+            
+
             animate={isShow ? 'show' : 'hide'}
             variants={{
                 show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 100, damping: 20, mass: 1 } },
