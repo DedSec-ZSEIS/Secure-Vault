@@ -75,13 +75,3 @@
         0%,100%{background-position: 0%;}
         50%{background-position: 100%;}
     }
-
-
-.help{
-    
-    top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-}
