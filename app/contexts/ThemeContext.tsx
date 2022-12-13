@@ -1,5 +1,5 @@
 "use client"
-import { useState, createContext, useEffect,  } from "react"
+import { useState, createContext  } from "react"
 
 
 interface IThemeContext {
@@ -22,13 +22,6 @@ export default function ThemeProvider({ children } : { children: React.ReactNode
   const [theme, setTheme] = useState("light")
   const [isDarkMode, setIsDarkMode] = useState(true)
 
-  useEffect(() => {
-    setTimeout(() => {
-      const isInDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-      setTheme(isInDarkMode ? "dark" : "light")
-      setIsDarkMode(isInDarkMode)
-    }, 300);
-  }, [])
 
 
   return (
@@ -39,3 +32,5 @@ export default function ThemeProvider({ children } : { children: React.ReactNode
     </>
   )
 }
+
+
