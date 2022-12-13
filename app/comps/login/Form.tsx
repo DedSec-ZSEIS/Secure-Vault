@@ -1,11 +1,37 @@
 'use client'
-import { useContext } from 'react'
-import { ThemeContext } from '../../contexts/ThemeContext'
+
 import styles from './form.module.css'
+import sha from "js-sha512"
 
 
 export default function Form() {
-    const { theme } = useContext( ThemeContext )
+    
+    const handleSubmit = (e: Event) => {
+            const email = document.getElementById('email') as HTMLInputElement | null;
+            const password = document.getElementById('password') as HTMLInputElement | null;
+            e.preventDefault()
+            const data = {
+            "email": String(email?.value),
+            "password": sha.sha512(String(password?.value))
+            }
+            console.log('hello')
+            fetch('http://epickastrona.ddns.net:3001/login', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8'
+            }
+            }).then(function (response) {
+            if (response.ok) {
+                return response.json();
+            }
+            return Promise.reject(response);
+            }).then(function (data) {
+            console.log(data);
+            }).catch(function (error) {
+            console.warn('Something went wrong.', error);
+            });
+        }
 
 
     return (
@@ -18,7 +44,7 @@ export default function Form() {
                         <label htmlFor="login" className="text-xl">Login</label>
                         <input 
                             type="textarea" 
-                            name="login" id="login"  
+                            name="email" id="email"  
                             placeholder="example@gmail.com" 
                             className={styles.login + " bg-white dark:bg-black"}  
                         />
@@ -34,7 +60,12 @@ export default function Form() {
                             className={styles.login + " bg-white dark:bg-black"}/>
                     </div>
                     <div className="flex justify-center mt-20 text-3xl font-light">
-                        <button className={styles.lineAnimation} >Dalej</button>
+                        <button 
+                            className={styles.lineAnimation} 
+                            onClick={handleSubmit} 
+                            >
+                        Dalej
+                        </button>
                     </div>
                 </form>
             </div>

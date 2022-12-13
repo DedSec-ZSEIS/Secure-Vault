@@ -8,6 +8,7 @@
     .login:-webkit-autofill:focus,
     .login:-webkit-autofill:active {
         transition: background-color 5000s ease-in-out 0s;
+        /* -webkit-text-fill-color: black ;    */
     }
     .lineAnimation{
         display: inline-block;
@@ -37,11 +38,23 @@
         .lineAnimation::after {
             background-color: white;
         }
+        .login:-webkit-autofill,
+        .login:-webkit-autofill:hover,
+        .login:-webkit-autofill:focus,
+        .login:-webkit-autofill:active{
+            -webkit-text-fill-color: white !important;
+        }
     }
 
     @media (prefers-color-scheme: light) {
         .lineAnimation::after {
             background-color: black;
+        }
+        .login:-webkit-autofill,
+        .login:-webkit-autofill:hover,
+        .login:-webkit-autofill:focus,
+        .login:-webkit-autofill:active{
+            -webkit-text-fill-color: black !important;
         }
     }
 
