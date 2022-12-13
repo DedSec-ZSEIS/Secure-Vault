@@ -1,4 +1,5 @@
 "use client"
+import { getCookie } from "cookies-next";
 import { useState, createContext  } from "react"
 
 
@@ -15,12 +16,13 @@ export const ThemeContext = createContext({
   isDarkMode: true,
   setTheme: () => {},
   setIsDarkMode: () => {},
-} as IThemeContext)
+} as IThemeContext )
 
 
 export default function ThemeProvider({ children } : { children: React.ReactNode }) {
   const [theme, setTheme] = useState("light")
   const [isDarkMode, setIsDarkMode] = useState(true)
+  console.log('Cookie: ' + getCookie("color-scheme"));
 
 
 

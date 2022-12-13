@@ -31,6 +31,7 @@ export default function Headbar() {
     }
 
 
+
     return (
         <div className={`headbar dark:bg-primary-deepblue bg-white flex items-center h-24 w-full shadow-lg relative text-white justify-between`}  style={{ gridArea: "headbar" }}>
             <div className="left-side-options flex items-center">
