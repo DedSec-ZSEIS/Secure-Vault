@@ -62,7 +62,7 @@ export default function Form() {
                     <div className="flex justify-center mt-20 text-3xl font-light">
                         <button 
                             className={styles.lineAnimation} 
-                            onClick={handleSubmit} 
+                            onClick={e => handleSubmit} 
                             >
                         Dalej
                         </button>
