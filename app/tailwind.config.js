@@ -32,7 +32,8 @@ module.exports = {
         '1': '1px',
       },
       gridTemplateColumns: {
-        "dashboardLayout": '100px 1fr'
+        "dashboardLayoutMenuClosed": '100px 1fr',
+        "dashboardLayoutMenuOpened": '300px 1fr',
       },
       gridTemplateRows: {
         "dashboardLayout": "96px 1fr"

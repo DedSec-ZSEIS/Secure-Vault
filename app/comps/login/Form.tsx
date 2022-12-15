@@ -1,38 +1,37 @@
 'use client'
 
 import styles from './form.module.css'
-// import sha from "js-sha512"
+import sha from "js-sha512"
 
 
 export default function Form() {
     
-    // const handleSubmit = (e) => {
-    //     e.preventDefault()
-    //     const data = {
-    //       // ts-ignore to nizej trzeba poprawic 2 linijki w dół
-    //         "email": String(document.querySelector('#email').value),
-    //         "password": sha.sha512(String(document.querySelector('#password').value))
-    //         }
-    //         console.log('hello')
-    //         fetch('http://epickastrona.ddns.net:3001/login',
-    //         {
-    //             method: 'POST',
-    //             body: JSON.stringify(data),
-    //             headers: {
-    //             'Content-Type': 'application/json; charset=UTF-8'
-    //             }
-    //         }
-    //         ).then(function (response) {
-    //         if (response.ok) {
-    //             return response.json();
-    //         }
-    //         return Promise.reject(response);
-    //         }).then(function (data) {
-    //         console.log(data);
-    //         }).catch(function (error) {
-    //         console.warn('Something went wrong.', error);
-    //         });
-    //     }
+    const handleSubmit = (e: Event) => {
+            const email = document.getElementById('email') as HTMLInputElement | null;
+            const password = document.getElementById('password') as HTMLInputElement | null;
+            e.preventDefault()
+            const data = {
+            "email": String(email?.value),
+            "password": sha.sha512(String(password?.value))
+            }
+            console.log('hello')
+            fetch('http://epickastrona.ddns.net:3001/login', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8'
+            }
+            }).then(function (response) {
+            if (response.ok) {
+                return response.json();
+            }
+            return Promise.reject(response);
+            }).then(function (data) {
+            console.log(data);
+            }).catch(function (error) {
+            console.warn('Something went wrong.', error);
+            });
+        }
 
 
     return (
@@ -63,7 +62,7 @@ export default function Form() {
                     <div className="flex justify-center mt-20 text-3xl font-light">
                         <button 
                             className={styles.lineAnimation} 
-                            // onClick={handleSubmit} 
+                            onClick={e => handleSubmit} 
                             >
                         Dalej
                         </button>
