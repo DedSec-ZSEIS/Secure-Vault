@@ -1,13 +1,10 @@
 import styles from './form.module.css'
 import TextField from '@mui/material/TextField';
 
-
-  // const ariaLabel = { 'aria-label': 'description' };
-
 export default function techHelp({open} : {open: boolean}) {
   return ( 
-    <div className={``}>xd
-      <div className='border-gray-500 border-2 rounded-3xl bg-white fixed w-4/12 top-1/4 left-1/3' >
+    <div className={`theme={darkTheme}`}>
+      <div className='border-gray-500 border-2 rounded-3xl bg-white dark:bg-black dark:text-white fixed w-4/12 top-1/4 left-1/3' >
           <form className="m-5 ">
               <h1 className="text-3xl font-thin  ">
                 Potrzebujesz pomocy?
@@ -23,7 +20,6 @@ export default function techHelp({open} : {open: boolean}) {
                   multiline
                   variant="standard"
                   className=" my-4  "
-                
                   InputLabelProps={{
                     style: { color: '#000' },
                   }}

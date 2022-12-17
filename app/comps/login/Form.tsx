@@ -2,11 +2,19 @@
 
 import styles from './form.module.css'
 import sha from "js-sha512"
+import { useRouter } from 'next/navigation'
 
 
+
+const PATH = process.env.NEXT_PUBLIC_PATH
+const APIPATH = process.env.NEXT_PUBLIC_APIPATH
 export default function Form() {
+    const router = useRouter()
     
-    const handleSubmit = (e: Event) => {
+    const handleSubmit = (e: any) => {
+        
+
+
             const email = document.getElementById('email') as HTMLInputElement | null;
             const password = document.getElementById('password') as HTMLInputElement | null;
             e.preventDefault()
@@ -14,22 +22,27 @@ export default function Form() {
             "email": String(email?.value),
             "password": sha.sha512(String(password?.value))
             }
-            console.log('hello')
-            fetch('http://epickastrona.ddns.net:3001/login', {
+            fetch(`${APIPATH}login`, {
             method: 'POST',
             body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json; charset=UTF-8'
-            }
-            }).then(function (response) {
-            if (response.ok) {
-                return response.json();
-            }
-            return Promise.reject(response);
-            }).then(function (data) {
-            console.log(data);
-            }).catch(function (error) {
-            console.warn('Something went wrong.', error);
+            headers:    {
+                "Content-Type": "application/json; charset=UTF-8",
+                }
+            }).then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                // if( warunek do zalogowania się) //
+                if (data.succesfull) {
+                    if(data.admin){
+                        router.push(`${PATH}dashboard`)
+                    }else{
+                        router.push(`${PATH}dashboard/user`)
+                    }
+                    
+                }
+                })
+                .catch((err) => {
+                console.log(err);
             });
         }
 
@@ -45,7 +58,7 @@ export default function Form() {
                         <input 
                             type="textarea" 
                             name="email" id="email"  
-                            placeholder="example@gmail.com" 
+                            placeholder="example@gmail.com"
                             className={styles.login + " bg-white dark:bg-black"}  
                         />
 
@@ -56,15 +69,15 @@ export default function Form() {
                             type="password" 
                             name="password" 
                             id="password" 
-                            placeholder="**********"  
+                            placeholder="**********"
                             className={styles.login + " bg-white dark:bg-black"}/>
                     </div>
                     <div className="flex justify-center mt-20 text-3xl font-light">
                         <button 
                             className={styles.lineAnimation} 
-                            onClick={e => handleSubmit} 
+                            onClick={e => handleSubmit(e)} 
                             >
-                        Dalej
+                            Dalej
                         </button>
                     </div>
                 </form>
