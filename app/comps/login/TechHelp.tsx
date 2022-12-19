@@ -1,11 +1,40 @@
 import styles from './form.module.css'
 import TextField from '@mui/material/TextField';
+import { FormEvent } from 'react';
+const APIPATH = process.env.NEXT_PUBLIC_APIPATH
 
 export default function techHelp({open} : {open: boolean}) {
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget);
+    const searchParams = new URLSearchParams(formData as any);
+    const email = document.getElementById('standard-textarea') as HTMLInputElement | null;
+    const problem = document.getElementById('outlined-basic') as HTMLInputElement | null;
+    const data = {
+      "email": String(email?.value),
+      "problem": String(problem?.value)
+    }
+    
+
+    fetch(`http://epickastrona.ddns.net:3001/help`, {
+      method: 'POST',
+      body: searchParams,
+      
+    }).then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    })
+  }
+
   return ( 
     <div className={`theme={darkTheme}`}>
-      <div className='border-gray-500 border-2 rounded-3xl bg-white dark:bg-black dark:text-white fixed w-4/12 top-1/4 left-1/3' >
-          <form className="m-5 ">
+      <div className='border-gray-500 border-2 rounded-3xl bg-white  fixed w-4/12 top-1/4 left-1/3' >
+          <form 
+            className="m-5 "
+            onSubmit={e => handleSubmit(e)}
+            
+            >
               <h1 className="text-3xl font-thin  ">
                 Potrzebujesz pomocy?
               </h1>
@@ -14,6 +43,7 @@ export default function techHelp({open} : {open: boolean}) {
               </h2>
               <div className="flex justify-center flex-col">
                 <TextField
+                  name='email'
                   id="standard-textarea"
                   label="Adres email"
                   placeholder="example@gmail.com"
@@ -42,6 +72,7 @@ export default function techHelp({open} : {open: boolean}) {
                       }}
                 />
                 <TextField
+                  name='problem'
                   fullWidth
                   id="outlined-basic"
                   label="Opisz swój problem, a my postaramy się go rozwiązać"
@@ -70,7 +101,7 @@ export default function techHelp({open} : {open: boolean}) {
                   }}  />
               </div>
               <div className="flex justify-center items-center my-8  text-3xl font-light">
-                <button className={styles.lineAnimation} >Wyślij</button>
+                <input type="submit" value="Wyślij" className={styles.lineAnimation} />
               </div>
           </form>
       </div>
