@@ -1,29 +1,34 @@
 'use client'
-import { useContext } from "react"
-import { ThemeContext } from "../../contexts/ThemeContext";
-import { BsMoonStars } from 'react-icons/bs';
-import { ImSun } from 'react-icons/im';
-import { MdMenuOpen } from 'react-icons/md';
-import { MenuContext } from "../../contexts/MenuContext";
+// import { BsMoonStars } from 'react-icons/bs';
+// import { ImSun } from 'react-icons/im';
+import { NightsStayRounded, LightModeRounded, MenuOpenRounded, SearchRounded } from '@mui/icons-material';
 import NavButton from "./NavButton";
-import { Avatar, TextField } from "@mui/material";
-import {BiSearchAlt } from 'react-icons/bi';
+import { Avatar, InputAdornment, Stack, TextField } from "@mui/material";
+import { createTheme } from '@mui/material/styles';
 import { setCookie } from "cookies-next";
+import { useStateContext } from '../../contexts/ContextProvider';
+
+const theme = createTheme({
+    shape: {
+        borderRadius: 8,
+    }
+})
+
+
 
 export default function Headbar() {
-    const { theme, setTheme, isDarkMode, setIsDarkMode } = useContext(ThemeContext)
-    const { isMenuOpen, setIsMenuOpen } = useContext(MenuContext)
+    const { theme, isMenuOpen, setIsMenuOpen, isDarkMode, setIsDarkMode, setTheme } = useStateContext()
     
     
     const handleClick = (name: string) => {
         switch (name) {
             case "darkMode":
                 setTheme(theme === "light" ? "dark" : "light")
-                setIsDarkMode(!isDarkMode)
+                setIsDarkMode(!isDarkMode) //(prev: any) => !prev
                 setCookie("color-scheme", theme === "light" ? "dark" : "light")
                 break
             case "menu":
-                setIsMenuOpen((prev: boolean) => !prev)
+                setIsMenuOpen(!isMenuOpen) //(prev: any) => !prev
                 break
             default:
                 break
@@ -31,20 +36,24 @@ export default function Headbar() {
     }
 
 
-
     return (
         <div className={`headbar dark:bg-primary-deepblue bg-white flex items-center h-24 w-full shadow-lg relative text-white justify-between`}  style={{ gridArea: "headbar" }}>
-            <div className="left-side-options flex items-center">
+            <Stack direction="row" spacing={4} sx={{ marginLeft: 4 }} alignItems="center">
                 <NavButton 
-                    icon={<MdMenuOpen  style={isMenuOpen ? {transform: 'scaleX(1)', transition: "all 0.15s ease-in" } : { transform: "scaleX(-1)", transition: "all 0.15s ease-in" }}/>}
+                    icon={<MenuOpenRounded  sx={{transform: isMenuOpen ? "scaleX(1)" : "scaleX(-1)", transition: "all 0.15s ease-in" }}/>}
                     customFunction={() => handleClick("menu")}
-                    customTw="duration-150 ease-in transition-all"
                 />
-                <TextField id="outlined-basic" label={<BiSearchAlt />} variant="outlined" placeholder="Search" style={{ borderRadius: "999px" }}/>
-            </div>
-            <div className="right-side-options mr-10 flex items-center">
+                <TextField
+                InputProps={{
+                    startAdornment: <InputAdornment position='start'><SearchRounded /></InputAdornment>
+                }}
+                placeholder="Search"
+                variant="standard"
+                style={{ borderRadius: "999px" }}/>
+            </Stack>
+            <Stack direction="row" spacing={4} sx={{ marginRight: 4 }} alignItems="center">
                 <NavButton 
-                    icon={isDarkMode ? <ImSun />  : <BsMoonStars />}
+                    icon={isDarkMode ?  <NightsStayRounded /> : <LightModeRounded />}
                     customFunction={() => handleClick("darkMode")}
                 />
                 <div className="profile-avatar w-16 h-16 dark:bg-light-deepblue bg-light-blue hover:bg-primary-blue hover:dark:bg-primary-blue rounded-full ease-in duration-150 p-2 flex items-center justify-center">
@@ -52,7 +61,7 @@ export default function Headbar() {
                         <Avatar src="../../public/images/person-avatar.png" alt="avatar" variant="circular"/>
                     </button>
                 </div>
-            </div>
+            </Stack>
         </div>
     )
 }

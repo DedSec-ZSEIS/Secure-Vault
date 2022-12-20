@@ -5,10 +5,13 @@
 import Headbar from "./Headbar";
 import NavButton from "./NavButton";
 import Sidebar from "./Sidebar";
+import Hero from "./Hero";
 
 export {
-    Headbar,NavButton,Sidebar
+    Headbar,NavButton,Sidebar, Hero
 }
 // zainportuj to tam sobie xdd (z tego pliku) 
 
 // ~Filip
+
+// ✅ done

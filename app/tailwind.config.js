@@ -44,5 +44,5 @@ module.exports = {
     }
   },
   plugins: [],
-  darkMode: 'media' //can be changed to 'media'or 'class'
+  darkMode: 'class' //can be changed to 'media'or 'class'
 }

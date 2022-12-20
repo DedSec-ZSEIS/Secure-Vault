@@ -1,5 +1,5 @@
 import './globals.css'
-import ContextProvider from '../contexts/Context'
+import StateProvider from '../contexts/ContextProvider'
 
 export default function RootLayout({
   children,
@@ -15,9 +15,9 @@ export default function RootLayout({
       <head />
       <body>
         <div className=''>
-          <ContextProvider>
+          <StateProvider>
             {children}
-          </ContextProvider>
+          </StateProvider>
         </div>
       </body>
     </html>
