@@ -1,5 +1,5 @@
 "use client"
-import { Headbar, Sidebar, Hero } from "../../comps/dashboard"
+import { Headbar, Sidebar } from "../../comps/dashboard"
 import { useStateContext } from "../../contexts/ContextProvider"
 import Loading from "./loading"
 import { Suspense } from "react"
@@ -14,7 +14,7 @@ const styles = {
 }
 
 
-function Dashboard() {
+function Dashboard({ children } : { children: React.ReactNode }) {
   const { theme, isMenuOpen } = useStateContext()
 
   return (
@@ -23,8 +23,11 @@ function Dashboard() {
             <div className={`bg-dark-grey grid-rows-dashboardLayout ${isMenuOpen ? "grid-cols-dashboardLayoutMenuOpened" : "grid-cols-dashboardLayoutMenuClosed"} gap-0 grid h-full`} style={styles.page}>
               <Sidebar />
               <Headbar />
-              <main className="main bg-primary-grey dark:bg-dark-deepblue h-full w-full"  style={{ gridArea: "main" }}>
-                <Hero />
+              <main className="bg-white dark:bg-dark-deepblue h-full w-full" style={{ gridArea: "main" }}>
+                <div className=" bg-light-blue dark:bg-light-deepblue rounded-xl m-2" style={{ height: "calc(100% - 16px)", width: "calc(100% - 16px)" }}>
+                    {/* Page Component ex. "Group" */}
+                    {children}
+                </div>
               </main>
             </div>
       </div>

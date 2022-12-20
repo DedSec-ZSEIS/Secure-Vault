@@ -23,7 +23,7 @@ const initialContext = {
     isUserProfileOpen: false,
     setIsUserProfileOpen: () => {},
 
-    theme: "light",
+    theme: "dark",
     setTheme: () => {},
 
     isDarkMode: true,
@@ -47,7 +47,7 @@ const StateContext = createContext(initialContext);
 
 const StateProvider = ({ children } : { children: React.ReactNode } ) => {
     const [isUserProfileOpen, setIsUserProfileOpen] = useState(false);
-    const [theme, setTheme] = useState("light");
+    const [theme, setTheme] = useState("dark");
     const [isDarkMode, setIsDarkMode] = useState(true);
     const [isMenuOpen, setIsMenuOpen] = useState(true);
     const [isAdmin, setIsAdmin] = useState(false);

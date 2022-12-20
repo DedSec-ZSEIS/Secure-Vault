@@ -37,10 +37,10 @@ export default function Headbar() {
 
 
     return (
-        <div className={`headbar dark:bg-primary-deepblue bg-white flex items-center h-24 w-full shadow-lg relative text-white justify-between`}  style={{ gridArea: "headbar" }}>
+        <div className={`headbar dark:bg-primary-deepblue bg-white flex items-center h-24 w-full dark:shadow-md relative text-white justify-between`}  style={{ gridArea: "headbar" }}>
             <Stack direction="row" spacing={4} sx={{ marginLeft: 4 }} alignItems="center">
                 <NavButton 
-                    icon={<MenuOpenRounded  sx={{transform: isMenuOpen ? "scaleX(1)" : "scaleX(-1)", transition: "all 0.15s ease-in" }}/>}
+                    icon={<MenuOpenRounded  sx={{transform: isMenuOpen ? "scale(1)" : "scale(-1)", transition: "all 0.15s ease-in" }}/>}
                     customFunction={() => handleClick("menu")}
                 />
                 <TextField
@@ -49,7 +49,7 @@ export default function Headbar() {
                 }}
                 placeholder="Search"
                 variant="standard"
-                style={{ borderRadius: "999px" }}/>
+                />
             </Stack>
             <Stack direction="row" spacing={4} sx={{ marginRight: 4 }} alignItems="center">
                 <NavButton 
