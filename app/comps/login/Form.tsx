@@ -1,7 +1,7 @@
 'use client'
 
 import styles from './form.module.css'
-import sha from "js-sha512"
+// import sha from "js-sha512"
 import { useRouter } from 'next/navigation'
 
 
@@ -20,7 +20,8 @@ export default function Form() {
             e.preventDefault()
             const data = {
             "email": String(email?.value),
-            "password": sha.sha512(String(password?.value))
+            // "password": sha.sha512(String(password?.value))
+            "password": String(password?.value)
             }
             fetch(`${APIPATH}login`, {
             method: 'POST',
