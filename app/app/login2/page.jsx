@@ -1,6 +1,6 @@
 "use client";
 import Spline from '@splinetool/react-spline';
-import sha from "js-sha512"
+// import sha from "js-sha512"
 
 export default function Login() {
   const handleSubmit = (e) => {
@@ -8,7 +8,8 @@ export default function Login() {
     const data = {
       // ts-ignore
       "email": String(document.querySelector('#email').value),
-      "password": sha.sha512(String(document.querySelector('#password').value))
+      // "password": sha.sha512(String(document.querySelector('#password').value))
+      "password": String(document.querySelector('#password').value)
     }
     console.log('hello')
     fetch('http://epickastrona.ddns.net:3001/login',
