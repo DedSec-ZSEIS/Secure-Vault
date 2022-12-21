@@ -2,12 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 /* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;400;500;600&display=swap'); */
-@font-face {
-  font-family: 'Default';
-  src: url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;400;500;600&display=swap');
-}
 
-@responsive {
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+
+
+/* @responsive {
   .text-shadow {
     text-shadow: 0 2px 4px rgba(0,0,0,0.10);
   }
@@ -23,7 +23,7 @@
   .text-shadow-none {
     text-shadow: none;
   }
-}
+} */
 
 *{
   padding: 0;
@@ -42,7 +42,7 @@ body {
 body {
   width: 100vw;
   height: 100vh;
-  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 a {

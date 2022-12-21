@@ -1,7 +1,7 @@
-import { IconButton } from "@mui/material"
+import { IconButton, Tooltip } from "@mui/material"
 
 
-export default function NavIconButton({ icon, customFunction }: { icon: JSX.Element, customFunction?: () => void, customTw?: string }) {
+export default function NavIconButton({ icon, customFunction, name }: { icon: JSX.Element, customFunction?: () => void, name: string}) {
 
   // return (
   //   <div className={`text-xl mx-10 h-9 w-9 flex dark:bg-light-deepblue bg-light-blue rounded-lg hover:dark:bg-primary-blue hover:bg-primary-blue hover:text-white text-primary-blue ease-in duration-150 hover:shadow-primary-blue-half hover:shadow-headbar-button ${customTw}`}>
@@ -11,9 +11,11 @@ export default function NavIconButton({ icon, customFunction }: { icon: JSX.Elem
   //   </div>
   // )
   return (
-    <IconButton onClick={customFunction} sx={{ width: "48px", height: "48px", borderRadius: "12px", background: "#2196F350", '&:hover': "#2196F3", color: "#2196F3" }}>
-      {icon}
-    </IconButton>
+    <Tooltip title={name}>
+      <IconButton onClick={customFunction} sx={{ width: "48px", height: "48px", borderRadius: "12px", background: "#2196F350", '&:hover': "#2196F3", color: "#2196F3" }}>
+        {icon}
+      </IconButton>
+    </Tooltip>
   )
 }
 
