@@ -8,11 +8,11 @@ export default function NavIconButton({ icon, customFunction, name }: { icon: JS
   //       <Button className="w-full flex justify-center items-center" onClick={customFunction}>
   //           {icon}
   //       </Button>
-  //   </div>
+  //   </div> background: "#2196F350"
   // )
   return (
     <Tooltip title={name}>
-      <IconButton onClick={customFunction} sx={{ width: "48px", height: "48px", borderRadius: "12px", background: "#2196F350", '&:hover': "#2196F3", color: "#2196F3" }}>
+      <IconButton onClick={customFunction} sx={{ width: "48px", height: "48px", borderRadius: "12px", '&:hover': "#2196F3", color: "#2196F3" }}>
         {icon}
       </IconButton>
     </Tooltip>

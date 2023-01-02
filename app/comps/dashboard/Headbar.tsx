@@ -4,21 +4,17 @@
 import { NightsStayRounded, LightModeRounded, MenuOpenRounded, SearchRounded } from '@mui/icons-material';
 import NavButton from "./NavButton";
 import { Avatar, InputAdornment, Stack, TextField } from "@mui/material";
-import { createTheme } from '@mui/material/styles';
-import { setCookie } from "cookies-next";
 import { useStateContext } from '../../contexts/ContextProvider';
 
 
 export default function Headbar() {
-    const { theme, isMenuOpen, setIsMenuOpen, isDarkMode, setIsDarkMode, setTheme } = useStateContext()
-    
+    const { isMenuOpen, setIsMenuOpen,  } = useStateContext()
+    const isDarkMode = true
     
     const handleClick = (name: string) => {
         switch (name) {
             case "darkMode":
-                setTheme(theme === "light" ? "dark" : "light")
-                setIsDarkMode(!isDarkMode) //(prev: any) => !prev
-                setCookie("color-scheme", theme === "light" ? "dark" : "light")
+                // toggle()
                 break
             case "menu":
                 setIsMenuOpen(!isMenuOpen) //(prev: any) => !prev
@@ -53,7 +49,7 @@ export default function Headbar() {
                 />
                 <div className="profile-avatar w-16 h-16 dark:bg-light-deepblue bg-light-blue hover:bg-primary-blue hover:dark:bg-primary-blue rounded-full ease-in duration-150 p-2 flex items-center justify-center">
                     <button className="profile-avatar-btn w-full h-full bg-primary-purple rounded-full overflow-hidden">
-                        <Avatar src="../../public/images/person-avatar.png" alt="avatar" variant="circular"/>
+                        {/* <Avatar src="../../public/images/person-avatar.png" alt="avatar" variant="circular"/> */}
                     </button>
                 </div>
             </Stack>
