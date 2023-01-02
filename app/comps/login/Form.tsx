@@ -1,8 +1,10 @@
 'use client'
 
 import styles from './form.module.css'
-// import sha from "js-sha512"
+import sha512 from 'crypto-js/sha512';
 import { useRouter } from 'next/navigation'
+import { useStateContext } from "../../contexts/ContextProvider"
+// import { useEffect } from 'react';
 
 
 
@@ -10,7 +12,10 @@ const PATH = process.env.NEXT_PUBLIC_PATH
 const APIPATH = process.env.NEXT_PUBLIC_APIPATH
 export default function Form() {
     const router = useRouter()
-    
+    const {userData, setUserData} = useStateContext()
+    // useEffect(() => {
+    //     console.log(userData)
+    // },[userData])
     const handleSubmit = (e: any) => {
         
 
@@ -20,8 +25,8 @@ export default function Form() {
             e.preventDefault()
             const data = {
             "email": String(email?.value),
-            // "password": sha.sha512(String(password?.value))
-            "password": String(password?.value)
+            "password": String(sha512(String(password?.value)))
+            // "password": String(password?.value)
             }
             fetch(`${APIPATH}login`, {
             method: 'POST',
@@ -34,6 +39,11 @@ export default function Form() {
                 console.log(data);
                 // if( warunek do zalogowania się) //
                 if (data.succesfull) {
+                    setUserData({
+                        email: data.email,
+                        uat: data.uat
+                    })
+                    console.log(userData)
                     if(data.admin){
                         router.push(`${PATH}dashboard`)
                     }else{

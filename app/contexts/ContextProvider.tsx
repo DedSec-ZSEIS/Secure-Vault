@@ -1,5 +1,5 @@
 'use client'
-import { createContext, useContext, useState } from "react";
+import { createContext, Dispatch, SetStateAction, useContext, useState } from "react";
 
 interface IStateContext {
     isUserProfileOpen: boolean;
@@ -16,6 +16,15 @@ interface IStateContext {
 
     isAdmin: boolean;
     setIsAdmin: (value: boolean) => void;
+    
+    userData: {
+        email: string;
+        uat: string;
+    };
+    setUserData: Dispatch<SetStateAction<{
+        email: string;
+        uat: string;
+    }>>
 }
 
 
@@ -35,6 +44,12 @@ const initialContext = {
     isAdmin: false,
     setIsAdmin: () => {},
 
+    userData: {
+        email: '',
+        uat: '',
+    },
+    setUserData:() => {}
+
 
 } as IStateContext
 
@@ -51,6 +66,10 @@ const StateProvider = ({ children } : { children: React.ReactNode } ) => {
     const [isDarkMode, setIsDarkMode] = useState(true);
     const [isMenuOpen, setIsMenuOpen] = useState(true);
     const [isAdmin, setIsAdmin] = useState(false);
+    const [userData, setUserData] = useState({
+        email: '',
+        uat: '',
+    });
 
     const value = {
         isUserProfileOpen,
@@ -63,6 +82,8 @@ const StateProvider = ({ children } : { children: React.ReactNode } ) => {
         setIsMenuOpen,
         isAdmin,
         setIsAdmin,
+        userData,
+        setUserData,
     }
 
     return (

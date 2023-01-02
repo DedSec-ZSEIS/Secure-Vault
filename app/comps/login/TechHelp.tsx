@@ -24,6 +24,7 @@ export default function techHelp({open} : {open: boolean}) {
     }).then((response) => response.json())
     .then((data) => {
       console.log(data);
+      
     })
   }
 
