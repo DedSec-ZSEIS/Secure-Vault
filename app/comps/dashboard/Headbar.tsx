@@ -5,7 +5,6 @@ import { NightsStayRounded, LightModeRounded, MenuOpenRounded, SearchRounded } f
 import NavButton from "./NavButton";
 import { Avatar, InputAdornment, Stack, TextField } from "@mui/material";
 import { createTheme } from '@mui/material/styles';
-import { setCookie } from "cookies-next";
 import { useStateContext } from '../../contexts/ContextProvider';
 
 
@@ -18,7 +17,6 @@ export default function Headbar() {
             case "darkMode":
                 setTheme(theme === "light" ? "dark" : "light")
                 setIsDarkMode(!isDarkMode) //(prev: any) => !prev
-                setCookie("color-scheme", theme === "light" ? "dark" : "light")
                 break
             case "menu":
                 setIsMenuOpen(!isMenuOpen) //(prev: any) => !prev
