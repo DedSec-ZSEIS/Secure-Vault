@@ -8,13 +8,6 @@ import { createTheme } from '@mui/material/styles';
 import { setCookie } from "cookies-next";
 import { useStateContext } from '../../contexts/ContextProvider';
 
-const theme = createTheme({
-    shape: {
-        borderRadius: 8,
-    }
-})
-
-
 
 export default function Headbar() {
     const { theme, isMenuOpen, setIsMenuOpen, isDarkMode, setIsDarkMode, setTheme } = useStateContext()
@@ -37,11 +30,12 @@ export default function Headbar() {
 
 
     return (
-        <div className={`headbar dark:bg-primary-deepblue bg-white flex items-center h-24 w-full dark:shadow-md relative text-white justify-between`}  style={{ gridArea: "headbar" }}>
+        <div className={`headbar dark:bg-primary-deepblue bg-white flex items-center rounded-bl-lg h-24 w-full dark:shadow-md relative text-white justify-between`}  style={{ gridArea: "headbar" }}>
             <Stack direction="row" spacing={4} sx={{ marginLeft: 4 }} alignItems="center">
                 <NavButton 
                     icon={<MenuOpenRounded  sx={{transform: isMenuOpen ? "scale(1)" : "scale(-1)", transition: "all 0.15s ease-in" }}/>}
                     customFunction={() => handleClick("menu")}
+                    name="Menu"
                 />
                 <TextField
                 InputProps={{
@@ -55,6 +49,7 @@ export default function Headbar() {
                 <NavButton 
                     icon={isDarkMode ?  <NightsStayRounded /> : <LightModeRounded />}
                     customFunction={() => handleClick("darkMode")}
+                    name={isDarkMode ? "Dark Mode" : "Light Mode"}
                 />
                 <div className="profile-avatar w-16 h-16 dark:bg-light-deepblue bg-light-blue hover:bg-primary-blue hover:dark:bg-primary-blue rounded-full ease-in duration-150 p-2 flex items-center justify-center">
                     <button className="profile-avatar-btn w-full h-full bg-primary-purple rounded-full overflow-hidden">

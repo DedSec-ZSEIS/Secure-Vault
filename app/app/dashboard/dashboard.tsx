@@ -20,7 +20,7 @@ function Dashboard({ children } : { children: React.ReactNode }) {
   return (
       <Suspense fallback={<Loading />}>
           <div className={`h-screen ${theme}`}>
-            <div className={`bg-dark-grey grid-rows-dashboardLayout ${isMenuOpen ? "grid-cols-dashboardLayoutMenuOpened" : "grid-cols-dashboardLayoutMenuClosed"} gap-0 grid h-full`} style={styles.page}>
+            <div className={`bg-white dark:bg-dark-deepblue text-black dark:text-white grid-rows-dashboardLayout ${isMenuOpen ? "grid-cols-dashboardLayoutMenuOpened" : "grid-cols-dashboardLayoutMenuClosed"} gap-0 grid h-full`} style={styles.page}>
               <Sidebar />
               <Headbar />
               <main className="bg-white dark:bg-dark-deepblue h-full w-full" style={{ gridArea: "main" }}>
