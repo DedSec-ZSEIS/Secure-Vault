@@ -4,7 +4,7 @@ import styles from './form.module.css'
 import sha512 from 'crypto-js/sha512';
 import { useRouter } from 'next/navigation'
 import { useStateContext } from "../../contexts/ContextProvider"
-// import { useEffect } from 'react';
+import axios from 'axios';
 
 
 
@@ -13,49 +13,62 @@ const APIPATH = process.env.NEXT_PUBLIC_APIPATH
 export default function Form() {
     const router = useRouter()
     const {userData, setUserData} = useStateContext()
-    // useEffect(() => {
-    //     console.log(userData)
-    // },[userData])
+
     const handleSubmit = (e: any) => {
+        e.preventDefault()
         
+        const email = document.getElementById('email') as HTMLInputElement | null;
+        const password = document.getElementById('password') as HTMLInputElement | null;
 
-
-            const email = document.getElementById('email') as HTMLInputElement | null;
-            const password = document.getElementById('password') as HTMLInputElement | null;
-            e.preventDefault()
-            const data = {
+        const data = {
             "email": String(email?.value),
             "password": String(sha512(String(password?.value)))
-            // "password": String(password?.value)
-            }
-            fetch(`${APIPATH}login`, {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers:    {
-                "Content-Type": "application/json; charset=UTF-8",
-                }
-            }).then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-                // if( warunek do zalogowania się) //
-                if (data.succesfull) {
-                    setUserData({
-                        email: data.email,
-                        uat: data.uat
-                    })
-                    console.log(userData)
-                    if(data.admin){
-                        router.push(`${PATH}dashboard`)
-                    }else{
-                        router.push(`${PATH}dashboard/user`)
-                    }
-                    
-                }
-                })
-                .catch((err) => {
-                console.log(err);
-            });
         }
+        // In Axios responses are already served as javascript object, no need to parse, simply get response and access data.//
+        axios.post(`${APIPATH}login`, data).then(res => res.data).then(data => {
+            if (data.succesfull) {
+                setUserData({
+                    email: data.email,
+                    uat: data.uat
+                })
+                console.log(userData)
+                if(data.admin){
+                    router.push(`${PATH}dashboard`)
+                }else{
+                    router.push(`${PATH}dashboard/user`)
+                }
+            }
+        })
+        // old fetch method
+
+        // fetch(`${APIPATH}login`, {
+        // method: 'POST',
+        // body: JSON.stringify(data),
+        // headers:    {
+        //     "Content-Type": "application/json; charset=UTF-8",
+        //     }
+        // }).then((response) => response.json())
+        // .then((data) => {
+        //     console.log(data);
+        //     // if( warunek do zalogowania się) 
+        //     if (data.succesfull) {
+        //         setUserData({
+        //             email: data.email,
+        //             uat: data.uat
+        //         })
+        //         console.log(userData)
+        //         if(data.admin){
+        //             router.push(`${PATH}dashboard`)
+        //         }else{
+        //             router.push(`${PATH}dashboard/user`)
+        //         }
+                
+        //     }
+        //     })
+        //     .catch((err) => {
+        //     console.log(err);
+        // });
+    }
 
 
     return (
