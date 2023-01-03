@@ -1,5 +1,6 @@
 import './globals.css'
 import StateProvider from '../contexts/ContextProvider'
+import Navigator from '../comps/Navigator'
 
 export default function RootLayout({
   children,
@@ -16,6 +17,7 @@ export default function RootLayout({
       <body>
         <div className=''>
           <StateProvider>
+            <Navigator />
             {children}
           </StateProvider>
         </div>

@@ -1,5 +1,4 @@
 import Navbar from "../comps/Navbar"
-import SplineHomepage from "../comps/SplineHomepage"
 
 
 export default function Home() {
@@ -13,9 +12,6 @@ export default function Home() {
           <h3 className="pt-12 pl-6 text-2xl max-w-xl text-purple-900">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium temporibus placeat labore laborum ad necessitatibus non quae ea debitis facere!</h3>
           <button>Get started</button>
         </header>
-        <div className="spline-wrapper">
-          <SplineHomepage></SplineHomepage>
-        </div>
       </div>
     </div>
   )

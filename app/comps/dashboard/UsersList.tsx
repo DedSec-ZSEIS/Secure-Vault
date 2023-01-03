@@ -8,8 +8,10 @@ import { useEffect, useState } from 'react';
 
 export default function UsersList() {
     const [users, setUsers] = useState([])
+    // const api_url = 'http://jsonplaceholder.typicode.com/users?limit=5'
+    const api_url = 'http://localhost:8080'
     async function getUsers() {
-        axios.get('http://jsonplaceholder.typicode.com/users?limit=5')
+        axios.get(api_url)
             .then(response => {
                 console.log(response);
                 setUsers(response.data)
