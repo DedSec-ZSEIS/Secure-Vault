@@ -17,6 +17,8 @@ export default function Headbar() {
             case "darkMode":
                 setTheme(theme === "light" ? "dark" : "light")
                 setIsDarkMode(!isDarkMode) //(prev: any) => !prev
+
+                localStorage.setItem("theme", !isDarkMode ? "dark" : "light")
                 break
             case "menu":
                 setIsMenuOpen(!isMenuOpen) //(prev: any) => !prev

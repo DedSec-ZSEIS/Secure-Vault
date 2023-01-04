@@ -1,5 +1,5 @@
 'use client'
-import { createContext, Dispatch, SetStateAction, useContext, useState } from "react";
+import { createContext, Dispatch, SetStateAction, useContext, useState, useEffect } from "react";
 
 interface IStateContext {
     isUserProfileOpen: boolean;
@@ -70,6 +70,29 @@ const StateProvider = ({ children } : { children: React.ReactNode } ) => {
         email: '',
         uat: '',
     });
+
+    useEffect(()=> {
+        const isInStorage = localStorage.getItem('theme')
+        const prefferedDarkScheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+
+        if (isInStorage) {
+            if (isInStorage === "dark") {
+                setTheme("dark")
+                setIsDarkMode(true)
+            } else {
+                setTheme("light")
+                setIsDarkMode(false)
+            }
+        }
+        else if (prefferedDarkScheme) {
+            setTheme("dark")
+            setIsDarkMode(true)
+        }
+        else {
+            setTheme("light")
+            setIsDarkMode(false)
+        }
+    }, [])
 
     const value = {
         isUserProfileOpen,
