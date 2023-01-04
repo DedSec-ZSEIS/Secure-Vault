@@ -4,67 +4,63 @@ import styles from './form.module.css'
 import sha512 from 'crypto-js/sha512';
 import { useRouter } from 'next/navigation'
 import { useStateContext } from "../../contexts/ContextProvider"
+import login from '../../utils/login';
+import register from '../../utils/register';
 // import { useEffect } from 'react';
 
 
 
 const PATH = process.env.NEXT_PUBLIC_PATH
 const APIPATH = process.env.NEXT_PUBLIC_APIPATH
-export default function Form() {
+
+
+export default function Form({ name, email="" }: { name: string, email?: string }) {
     const router = useRouter()
     const {userData, setUserData} = useStateContext()
     // useEffect(() => {
     //     console.log(userData)
     // },[userData])
-    const handleSubmit = (e: any) => {
-        
-
-
-            const email = document.getElementById('email') as HTMLInputElement | null;
-            const password = document.getElementById('password') as HTMLInputElement | null;
-            e.preventDefault()
-            const data = {
-            "email": String(email?.value),
-            "password": String(sha512(String(password?.value)))
-            // "password": String(password?.value)
-            }
-            fetch(`${APIPATH}login`, {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers:    {
-                "Content-Type": "application/json; charset=UTF-8",
-                }
-            }).then((response) => response.json())
-            .then((data) => {
-                console.log(data);
-                // if( warunek do zalogowania się) //
-                if (data.succesfull) {
-                    setUserData({
-                        email: data.email,
-                        uat: data.uat
-                    })
-                    console.log(userData)
-                    if(data.admin){
-                        router.push(`${PATH}dashboard`)
-                    }else{
-                        router.push(`${PATH}dashboard/user`)
-                    }
+    const handleSubmit = async (e: any) => {
+        e.preventDefault()
+        if(name === 'login') {
+            const data = await login()
+            console.log(data)
+            console.log(data.admin);
+            
+            if (data.succesfull) {
+                setUserData({
+                    email: data.email,
+                    uat: data.uat
+                })                
+                if (data.admin) {                    
+                    router.push(`${PATH}dashboard`)
+                } else {
+                    router.push(`${PATH}dashboard/user`)
                     
                 }
-                })
-                .catch((err) => {
-                console.log(err);
-            });
+            }
+
+        } else {
+                const name = document.getElementById('name') as HTMLInputElement
+                const password = document.getElementById('password') as HTMLInputElement
+                const hashedPassword = sha512(password.value).toString()
+                const data = await register(email, hashedPassword, userData.uat)
+                console.log(data);
+                
         }
+    }
 
 
     return (
         <div className={'wrapper shadow w-3/5 h-1/2 md:w-2/5 lg:w-1/3 xl:w-1/4 2xl:w-1/5 relative ' + styles.wrapper}>
             <div className="border-gray-500 border-2 rounded-3xl w-full h-full font-sans scale-110 bg-white text-black dark:bg-black dark:text-white ">
-                <h2 className="my-8 text-3xl font-normal flex  justify-center relative">Zaloguj się</h2>
+                <h2 className="my-8 text-3xl font-normal flex  justify-center relative">
+                    {name === 'login' ? 'Zaloguj się' : 'Stwórz hasło'}
+                </h2>
                 <form action="#" className="mx-8 mt-16  ">
                     {/* poprzednio w input login byl name="email" */}
-                    <div className=" mt-10 flex flex-col border-b-2 border-black dark:border-white">
+                    {
+                        name === 'login' && <div className=" mt-10 flex flex-col border-b-2 border-black dark:border-white">
                         <label htmlFor="login" className="text-xl">Login</label>
                         <input 
                             type="textarea" 
@@ -74,6 +70,7 @@ export default function Form() {
                         />
 
                     </div>
+                    }
                     <div className="my-5 flex flex-col border-b-2 border-black dark:border-white">
                         <label htmlFor="password" className="text-xl">Hasło</label>
                         <input 

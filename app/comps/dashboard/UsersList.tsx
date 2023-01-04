@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 
 
 export default function UsersList() {
-    const [users, setUsers] = useState([])
+    const [users, setUsers] = useState([{}])
     // const api_url = 'http://jsonplaceholder.typicode.com/users?limit=5'
     const api_url = 'http://localhost:8080'
     async function getUsers() {
@@ -21,7 +21,12 @@ export default function UsersList() {
             });
     }
     useEffect(() => {
-        getUsers();
+        const us = [
+            { id: 1, name: 'John Doe', username: 'johndoe', email: '    ' },
+            { id: 2, name: 'Jane Doe', username: 'janedoe', email: '    ' },
+        ]
+        // getUsers();
+        setUsers(us)
     }, []);
 
 
@@ -36,7 +41,7 @@ export default function UsersList() {
 
   return (
     <div className='h-96 w-full'>
-        <DataGrid rows={users} columns={columns} loading={!users.length}/>
+        {/* <DataGrid rows={users} columns={columns} loading={!users.length}/> */}
     </div>
   )
 }
