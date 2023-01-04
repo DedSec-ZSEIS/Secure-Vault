@@ -13,8 +13,13 @@ export default function page({ params } : { params: { activateToken: string } })
     const { activateToken } = params
 
     const [open, setOpen] = useState(false);
-    const [email, setEmail] = useState('')
-    const [uat, setUat] = useState('')
+    // const [email, setEmail] = useState('')
+    // const [uat, setUat] = useState('')
+    const [res, setRes] = useState({email: '', uat: ''})
+
+    const isUatValid = res.uat === activateToken
+    console.log(activateToken, res.uat, isUatValid);
+    
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -25,8 +30,10 @@ export default function page({ params } : { params: { activateToken: string } })
     async function getEmail() {
       const data = await validateLink(activateToken)
       console.log(data);
-      setEmail(data.email)
-      setUat(data.uat)
+      setRes({
+        email: data.email,
+        uat: data.uat
+      })
     }
     useEffect(() => {
       getEmail()
@@ -43,7 +50,9 @@ export default function page({ params } : { params: { activateToken: string } })
           hide: { filter: 'blur(0px)', transition: { duration: 0.5 } }
       }}
       >
-      <Form  name="activate" email={email} uat={uat} />
+        {
+          isUatValid ? <Form name='activate' email={res.email} uat={res.uat} /> : <h1 className='text-3xl text-center'>Url has expired or doesn't exist. Please ask admin for add your email to the system.</h1>
+        }
       <button 
           className='fixed left-3 bottom-3 size-3 text-3xl z-50'
           onClick={handleClickOpen}
