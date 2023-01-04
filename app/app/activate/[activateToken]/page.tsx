@@ -14,6 +14,7 @@ export default function page({ params } : { params: { activateToken: string } })
 
     const [open, setOpen] = useState(false);
     const [email, setEmail] = useState('')
+    const [uat, setUat] = useState('')
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -24,6 +25,8 @@ export default function page({ params } : { params: { activateToken: string } })
     async function getEmail() {
       const data = await validateLink(activateToken)
       console.log(data);
+      setEmail(data.email)
+      setUat(data.uat)
     }
     useEffect(() => {
       getEmail()
@@ -40,7 +43,7 @@ export default function page({ params } : { params: { activateToken: string } })
           hide: { filter: 'blur(0px)', transition: { duration: 0.5 } }
       }}
       >
-      <Form  name="activate" email={email} />
+      <Form  name="activate" email={email} uat={uat} />
       <button 
           className='fixed left-3 bottom-3 size-3 text-3xl z-50'
           onClick={handleClickOpen}

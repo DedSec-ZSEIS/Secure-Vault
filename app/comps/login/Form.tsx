@@ -14,7 +14,7 @@ const PATH = process.env.NEXT_PUBLIC_PATH
 const APIPATH = process.env.NEXT_PUBLIC_APIPATH
 
 
-export default function Form({ name, email="" }: { name: string, email?: string }) {
+export default function Form({ name, email='', uat='' }: { name: string, email?: string, uat?: string }) {
     const router = useRouter()
     const {userData, setUserData} = useStateContext()
     // useEffect(() => {
@@ -44,7 +44,7 @@ export default function Form({ name, email="" }: { name: string, email?: string 
                 const name = document.getElementById('name') as HTMLInputElement
                 const password = document.getElementById('password') as HTMLInputElement
                 const hashedPassword = sha512(password.value).toString()
-                const data = await register(email, hashedPassword, userData.uat)
+                const data = await register(email, hashedPassword, uat)
                 console.log(data);
                 
         }
