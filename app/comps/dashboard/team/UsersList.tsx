@@ -1,12 +1,12 @@
 "use client"
-import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
+import { GridColDef } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
 import { useStateContext } from '../../../contexts/ContextProvider';
 import getUsers from '../../../utils/getUsers';
 import UsersDataGrid from './UsersDataGrid';
 
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import { IconButton } from '@mui/material';
+import { Avatar, IconButton, Typography } from '@mui/material';
 
 // const bannerUnitId_1 = __DEV__ ? TestIds.BANNER : process.env.;
 
@@ -46,11 +46,11 @@ export default function UsersList() {
     }, [])
 
     useEffect(() => {
-        setFormattedUsers(users.map((user: any, index: number) => {
+        setFormattedUsers(users?.map((user: any, index: number) => {
         
             return {
-                dbId: user?.id,
-                id: index + 1,
+                id: user?.id,
+                shownId: index + 1,
                 name: user?.fullName?.split(' ')[0],
                 surname: user?.fullName?.split(' ')[1],
                 email: user?.email,
@@ -59,7 +59,6 @@ export default function UsersList() {
                 role: user?.admin ? 'Admin' : 'User',
             }
         }))
-        console.log(formattedUsers)
     }, [users])
 
     function handleClick(e: any, action: string) {
@@ -78,18 +77,35 @@ export default function UsersList() {
         }
     }
 
-    function DeleteButton () {
+    const DeleteButton = () => <IconButton onClick={(e) => handleClick(e, 'remove')} aria-label="Delete"><DeleteOutlineIcon /></IconButton>
+    const UserProfile = () => {
+        const i = 0
+        const getFullName = (i: number) => {
+            let fullname = ''
+            if (formattedUsers[i].name) fullname += formattedUsers[i].name
+            if (formattedUsers[i].surname) fullname += ` ${formattedUsers[i].surname}`
+            return fullname
+        }
         return (
-            <IconButton onClick={(e) => handleClick(e, 'remove')} aria-label="Delete"><DeleteOutlineIcon /></IconButton>
+            <div className="flex gap-1">
+                <div className="flex-1">
+                    <Avatar alt={formattedUsers[i].name}/>
+                </div>
+                <div className="flex justify-center items-left flex-col">
+                    <Typography align='left' variant="subtitle2">{getFullName(i)}</Typography>
+                    <Typography align='left' variant="subtitle2">{formattedUsers[i].email}</Typography>
+                </div>
+            </div>
         )
     }
 
     const columns: GridColDef[] = [
-        { field: "select", renderHeader: () => <input type="checkbox" onInput={(e) => handleClick(e, 'selectAll')} />, width: 25, renderCell: () => <input type="checkbox" onInput={(e) => handleClick(e, 'select')} />, disableColumnMenu: true, sortable: false, headerAlign: 'center', align: 'center'},
-        { field: 'id', headerName: '#', width: 150 },
-        { field: 'name', headerName: 'Imie', width: 150 },
-        { field: 'surname', headerName: 'Nazwisko', width: 150 },
-        { field: 'email', headerName: 'Email', width: 150 },
+        { field: 'id', headerName: '_id', width: 150, hide: true},
+        { field: 'shownId', headerName: '#', width: 150 },
+        // { field: 'name', headerName: 'Imie', width: 150 },
+        // { field: 'surname', headerName: 'Nazwisko', width: 150 },
+        // { field: 'email', headerName: 'Email', width: 150 },
+        { field: 'userProfile', headerName: 'Profil', width: 150, renderCell: () => <UserProfile />, disableColumnMenu: true, sortable: false, align: "center" },
         { field: 'dbSpaceAllocated', headerName: 'Przydzielone miejsce', width: 150 },
         { field: 'dbSpaceUsed', headerName: 'Zużyte miejsce', width: 150 },
         { field: 'role', headerName: 'Rola', width: 150 }, // this will be custom renderCell() and label will be "admin" or "user". defaultly set to what received from api
@@ -99,8 +115,8 @@ export default function UsersList() {
     
     //create interface for formattedUsers
     interface IFormattedUser {
-        dbId: number,
         id: number,
+        shownId: number,
         name: string,
         surname: string,
         email: string,
@@ -112,7 +128,7 @@ export default function UsersList() {
     
 
   return (
-    <div className='h-96 w-full'>
+    <div className=''>
         <UsersDataGrid users={formattedUsers} columns={columns} />
     </div>
   )

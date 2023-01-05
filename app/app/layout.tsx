@@ -1,11 +1,16 @@
+"use client"
 import './globals.css'
-import StateProvider from '../contexts/ContextProvider'
 import Navigator from '../comps/Navigator'
+import { SessionProvider } from "next-auth/react"
+import StateProvider from '../contexts/ContextProvider'
+import MuiThemeProvider from '../contexts/MuiThemeProvider'
 
 export default function RootLayout({
   children,
+  session,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode,
+  session: any
 }) {
   return (
     <html lang="en">
@@ -15,12 +20,14 @@ export default function RootLayout({
       */}
       <head />
       <body>
-        <div className=''>
+        <SessionProvider session={session} >
           <StateProvider>
-            <Navigator />
-            {children}
+            <MuiThemeProvider>
+              <Navigator />
+              {children}
+            </MuiThemeProvider>
           </StateProvider>
-        </div>
+        </SessionProvider>
       </body>
     </html>
   )
