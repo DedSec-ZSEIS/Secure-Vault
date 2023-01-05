@@ -14,6 +14,8 @@ export default function CreateUser() {
             "uat": userData.uat,
             "createdEmail": String(createdEmail?.value)
             }
+            console.log(data);
+            
             fetch(`${APIPATH}generateUser`, {
             method: 'POST',
             headers:    {

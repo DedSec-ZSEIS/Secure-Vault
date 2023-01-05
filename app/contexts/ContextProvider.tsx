@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import { createContext, Dispatch, SetStateAction, useContext, useState, useEffect } from "react";
 
 interface IStateContext {
@@ -50,7 +50,7 @@ const initialContext = {
     },
     setUserData:() => {}
 
-
+    
 } as IStateContext
 
 
@@ -59,6 +59,53 @@ const initialContext = {
 
 
 const StateContext = createContext(initialContext);
+
+interface IStorage {
+    (
+        setTheme: Dispatch<SetStateAction<string>>,
+        setIsDarkMode: Dispatch<SetStateAction<boolean>>,
+        setUserData: Dispatch<SetStateAction<{
+            email: string;
+            uat: string;
+        }>>
+    ) : void
+}
+const storage: IStorage = (setTheme, setIsDarkMode, setUserData) => {
+    const isThemeInStorage = localStorage.getItem('theme')
+    const prefferedDarkScheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+
+    if (isThemeInStorage) {
+        if (isThemeInStorage === "dark") {
+            setTheme("dark")
+            setIsDarkMode(true)
+        } else {
+            setTheme("light")
+            setIsDarkMode(false)
+        }
+    }
+    else if (prefferedDarkScheme) {
+        setTheme("dark")
+        setIsDarkMode(true)
+    }
+    else {
+        setTheme("light")
+        setIsDarkMode(false)
+    }
+
+    const session = sessionStorage.getItem('session')
+
+    if (session) {
+        const { email, uat } = JSON.parse(session)
+        setUserData({
+            email,
+            uat
+        })
+    }
+
+
+
+}
+
 
 const StateProvider = ({ children } : { children: React.ReactNode } ) => {
     const [isUserProfileOpen, setIsUserProfileOpen] = useState(false);
@@ -72,26 +119,7 @@ const StateProvider = ({ children } : { children: React.ReactNode } ) => {
     });
 
     useEffect(()=> {
-        const isInStorage = localStorage.getItem('theme')
-        const prefferedDarkScheme = window.matchMedia('(prefers-color-scheme: dark)').matches
-
-        if (isInStorage) {
-            if (isInStorage === "dark") {
-                setTheme("dark")
-                setIsDarkMode(true)
-            } else {
-                setTheme("light")
-                setIsDarkMode(false)
-            }
-        }
-        else if (prefferedDarkScheme) {
-            setTheme("dark")
-            setIsDarkMode(true)
-        }
-        else {
-            setTheme("light")
-            setIsDarkMode(false)
-        }
+        storage(setTheme, setIsDarkMode, setUserData)
     }, [])
 
     const value = {
@@ -115,6 +143,11 @@ const StateProvider = ({ children } : { children: React.ReactNode } ) => {
         </StateContext.Provider>
     )
 }
+
+
+
+
+
 
 export default StateProvider;
 

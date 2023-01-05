@@ -29,7 +29,7 @@ export default function Page() {
                         hide: { filter: 'blur(0px)', transition: { duration: 0.5 } }
                     }}
                     >
-                    <Form />
+                    <Form  name="login" />
                     <button 
                         className='fixed left-3 bottom-3 size-3 text-3xl z-50'
                         onClick={handleClickOpen}
