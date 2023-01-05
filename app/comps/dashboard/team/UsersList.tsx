@@ -71,10 +71,11 @@ export default function UsersList() {
     }
 
     const formattedUsers: IFormattedUser[] = users.map((user: any, index) => {
+        
         return {
             id: index + 1,
-            name: user?.fullName?.split(0, (user.fullName.indexOf(" ") + 1)),
-            surname: user?.fullName?.split(user.fullName.indexOf(" ") + 1),
+            name: user?.name,
+            surname: user?.surname,
             email: user?.email,
             dbSpaceAllocated: user?.dbSpaceAllocated,
             dbSpaceUsed: user?.dbSpaceUsed,
