@@ -1,7 +1,7 @@
 
 import logo512 from "../../public/images/tarcza-512-black.png";
 import Image from "next/image";
-import {  Stack, Typography, ListItem, List } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useStateContext } from "../../contexts/ContextProvider";
 import SidebarList from "./SidebarList";
 import { useState } from "react";
@@ -12,6 +12,7 @@ export default function Sidebar() {
   const [active, setActive] = useState('home')
 
 
+  
   return (
     <div className="sidebar bg-white dark:bg-dark-deepblue dark:text-white text-black" style={{ gridArea: "sidebar" }}>
       <div className="w-full h-24 flex justify-center items-center">

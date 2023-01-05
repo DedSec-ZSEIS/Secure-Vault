@@ -2,14 +2,12 @@
 import {useState, useEffect} from 'react';
 import Form from '../../../comps/login/Form'
 import TechHelp from '../../../comps/login/TechHelp';
-// import  {MdOutlineLiveHelp}  from 'react-icons/md';
 import QuizRoundedIcon from '@mui/icons-material/QuizRounded';
 import { motion as m } from 'framer-motion';
 import Dialog from '@mui/material/Dialog';
-import { useRouter } from 'next/navigation';
 import validateLink from '../../../utils/validateLink';
 
-export default function page({ params } : { params: { activateToken: string } }) {
+export default function Page({ params } : { params: { activateToken: string } }) {
     const { activateToken } = params
 
     const [open, setOpen] = useState(false);
@@ -21,10 +19,10 @@ export default function page({ params } : { params: { activateToken: string } })
     console.log(activateToken, res.uat, isUatValid);
     
 
-    const handleClickOpen = () => {
+    function handleOpen (): void {
         setOpen(true);
     };
-    const handleClose = () => {
+    function handleClose(): void {
         setOpen(false);
     };
     async function getEmail() {
@@ -55,7 +53,7 @@ export default function page({ params } : { params: { activateToken: string } })
         }
       <button 
           className='fixed left-3 bottom-3 size-3 text-3xl z-50'
-          onClick={handleClickOpen}
+          onClick={handleOpen}
       >
           <QuizRoundedIcon  className='text-4xl p-2 box-content duration-150 dark:text-white hover:bg-slate-200 dark:hover:bg-gray-500 dark:hover:bg-opacity-50 hover:bg-opacity-50 rounded-lg'/>
       </button>

@@ -15,6 +15,8 @@ export default function UsersDataGrid({ users, columns }: { users: any[], column
 
 
   return (
-    <DataGrid rows={users} columns={columns} loading={loading}/>
+    <DataGrid rows={users} columns={columns} loading={loading}
+      
+    />
   )
 }
