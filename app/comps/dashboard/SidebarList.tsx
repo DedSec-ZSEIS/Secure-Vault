@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const StyledListItemButton = styled(ListItemButton)(({ theme }) => ({
     borderRadius: "12px",
-    backgroundColor: theme.palette.neutral?.darker,
+    backgroundColor: theme.palette.actions?.lightpurple,
 }))
 
 export default function SidebarList() {
