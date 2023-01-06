@@ -43,6 +43,35 @@ export default function techHelp({open} : {open: boolean}) {
                 Wypełnij formularz i napisz do nas
               </h2>
               <div className="flex justify-center flex-col">
+              <TextField
+                  name='email'
+                  id="standard-textarea"
+                  label="Podaj Imie i Nazwisko"
+                  placeholder="Jan Kowalski"
+                  multiline
+                  variant="standard"
+                  className=" my-2  "
+                  InputLabelProps={{
+                    style: { color: '#000' },
+                  }}
+                  sx={{
+                        color: '#000',
+                        '& .MuiOutlinedInput-root': {
+                          '& fieldset': {
+                            borderColor: '#000',
+                            color: '#6b6b6b',
+                          },
+                          '&:hover fieldset': {
+                            borderColor: '#000',
+                            color: '#6b6b6b',
+                          },
+                          '&.Mui-focused fieldset': {
+                            borderColor: '#000',
+                            color: '#6b6b6b',
+                          }
+                        },
+                      }}
+                />
                 <TextField
                   name='email'
                   id="standard-textarea"
@@ -50,7 +79,7 @@ export default function techHelp({open} : {open: boolean}) {
                   placeholder="example@gmail.com"
                   multiline
                   variant="standard"
-                  className=" my-4  "
+                  className=" mb-8 mt-2 "
                   InputLabelProps={{
                     style: { color: '#000' },
                   }}

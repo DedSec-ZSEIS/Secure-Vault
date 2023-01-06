@@ -8,8 +8,8 @@ export default function page() {
         <div className="p-4">
             <CreateUser />
             <br />
-            <Paper>
-                <Card>
+            <Paper elevation={0}>
+                <Card elevation={0}>
                     <UsersList />
                 </Card>
             </Paper>

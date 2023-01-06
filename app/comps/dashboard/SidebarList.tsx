@@ -1,14 +1,14 @@
-import { ListItemButton, ListItemIcon, ListItemText, List, ListSubheader } from "@mui/material";
-import { theme } from "../../theme/theme";
+import { ListItemButton, ListItemIcon, ListItemText, List, ListSubheader, styled } from "@mui/material";
+// import { theme } from "../../theme/theme";
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import { useStateContext } from "../../contexts/ContextProvider";
 import Link from "next/link";
 
-const sxStyle = {
+const StyledListItemButton = styled(ListItemButton)(({ theme }) => ({
     borderRadius: "12px",
-    bgcolor: theme.palette.secondary.main
-}
+    backgroundColor: theme.palette.actions?.lightpurple,
+}))
 
 export default function SidebarList() {
     const { isMenuOpen } = useStateContext();
@@ -35,20 +35,20 @@ function OpenedList() {
         }
     >
         <Link href={`${path}/`} passHref>
-            <ListItemButton sx={sxStyle}>
+            <StyledListItemButton>
                 <ListItemIcon>
                     <HomeOutlinedIcon />
                 </ListItemIcon>
                 <ListItemText primary="Home" />
-            </ListItemButton>
+            </StyledListItemButton>
         </Link>
         <Link href={`${path}/team`} passHref>
-            <ListItemButton sx={sxStyle}>
+            <StyledListItemButton>
                 <ListItemIcon>
                     <PeopleAltOutlinedIcon />
                 </ListItemIcon>
                 <ListItemText primary="Team" />
-            </ListItemButton>
+            </StyledListItemButton>
         </Link>
     </List>
     )
@@ -61,18 +61,18 @@ function ClosedList() {
         component="nav"
     >
         <Link href={`${path}/`} passHref>
-            <ListItemButton sx={sxStyle}>
+            <StyledListItemButton>
                 <ListItemIcon>
                     <HomeOutlinedIcon />
                 </ListItemIcon>
-            </ListItemButton>
+            </StyledListItemButton>
         </Link>
         <Link href={`${path}/team`} passHref>
-            <ListItemButton sx={sxStyle}>
+            <StyledListItemButton>
                 <ListItemIcon>
                     <PeopleAltOutlinedIcon />
                 </ListItemIcon>
-            </ListItemButton>
+            </StyledListItemButton>
         </Link>
     </List>
     )

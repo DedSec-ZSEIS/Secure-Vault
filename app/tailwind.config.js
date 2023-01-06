@@ -16,8 +16,8 @@ module.exports = {
         'primary-blue' : "#2196F3",
         'primary-blue-half' : "#2196F350",
         'light-blue': '#E3F2FD',
-        'primary-deepblue': '#212946',
-        'light-deepblue': '#29314f',
+        'light-deepblue': '#212946',
+        'primary-deepblue': '#1a223f',
         'dark-deepblue': '#111936',
 
         'primary-deeppurple': '#673AB7',

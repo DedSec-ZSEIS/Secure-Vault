@@ -1,6 +1,7 @@
 "use client"
 import { createContext, Dispatch, SetStateAction, useContext, useState, useEffect } from "react";
 
+
 interface IStateContext {
     isUserProfileOpen: boolean;
     setIsUserProfileOpen: (value: boolean) => void;
@@ -101,9 +102,6 @@ const storage: IStorage = (setTheme, setIsDarkMode, setUserData) => {
             uat
         })
     }
-
-
-
 }
 
 
@@ -139,7 +137,9 @@ const StateProvider = ({ children } : { children: React.ReactNode } ) => {
 
     return (
         <StateContext.Provider value={value}>
-            {children}
+            <div className={`h-screen ${theme}`}>
+                {children}
+            </div>
         </StateContext.Provider>
     )
 }

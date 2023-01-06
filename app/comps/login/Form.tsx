@@ -1,6 +1,7 @@
 'use client'
 
 import styles from './form.module.css'
+import { useSession, signIn } from 'next-auth/react';
 import sha512 from 'crypto-js/sha512';
 import { useRouter } from 'next/navigation'
 import { useStateContext } from "../../contexts/ContextProvider"
@@ -10,16 +11,38 @@ import register from '../../utils/register';
 import {useForm, Controller} from 'react-hook-form'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import { useEffect } from 'react';
+import oauthLogin from '../../utils/oauthLogin';
 
 const PATH = process.env.NEXT_PUBLIC_PATH
 const APIPATH = process.env.NEXT_PUBLIC_APIPATH
-
 
 export default function Form({ name, email='', uat='' }: { name: string, email?: string, uat?: string }) {
     
     const router = useRouter()
     const {userData, setUserData} = useStateContext()
     const Submit = async (e: any) => {
+    const { setUserData, userData } = useStateContext()
+
+    const { data: session, status } = useSession()
+
+    
+    // useEffect(() => {
+    //     if (session) {
+    //         const data = oauthLogin(session?.user?.email)
+    //         console.log(data);
+    //         if (!data) {
+    //             alert("Nie udało się zalogować")
+    //         } else {
+    //             setUserData({
+    //                 email: data.email,
+    //                 uat: data.uat,
+    //             })
+    //         }
+    //     }
+    // }, [])
+
+    const handleSubmit = async (e: any) => {
         e.preventDefault()
         if(name === 'login') {
             const data = await login()
@@ -37,14 +60,6 @@ export default function Form({ name, email='', uat='' }: { name: string, email?:
                     email: data.email,
                     uat: data.uat
                 }))
-                // if (data.admin) {      
-                //     console.log('admin');
-                //     router.push(`${PATH}dashboard`)
-                // } else {
-                //     console.log('user');
-                //     router.push(`${PATH}dashboard/user`)
-                    
-                // }
             }
 
         } else {
@@ -74,6 +89,16 @@ export default function Form({ name, email='', uat='' }: { name: string, email?:
                 <h2 className="my-8 text-3xl font-normal flex  justify-center relative">
                     {name === 'login' ? 'Zaloguj się' : 'Zarejestruj się'}
                 </h2>
+                <form action="#" className="mx-8 mt-16  ">
+                    {
+                        name === 'login' && <div className=" mt-10 flex flex-col border-b-2 border-black dark:border-white">
+                        <label htmlFor="login" className="text-xl">Login</label>
+                        <input 
+                            type="textarea" 
+                            name="email" id="email"  
+                            placeholder="example@gmail.com"
+                            className={styles.login + " bg-white dark:bg-black"}  
+                        />
 
                 {
                     name === 'activate' ? (<form onSubmit={Submit} className="mx-8 mt-12 ">
@@ -108,8 +133,8 @@ export default function Form({ name, email='', uat='' }: { name: string, email?:
                         />
                         {/* <input type="submit" /> */}
                         <Button variant="outlined" type="submit" className='mt-5'>Wyślij</Button>
-                    </div>
-                </form>)
+                    </div>)
+                </form>
                     :
                     (
                     <form onSubmit={Submit} className="mx-8 mt-12 flex flex-col">
@@ -136,6 +161,7 @@ export default function Form({ name, email='', uat='' }: { name: string, email?:
                     </form>
                     )
                 }
+            
             </div>
         </div>
     )
