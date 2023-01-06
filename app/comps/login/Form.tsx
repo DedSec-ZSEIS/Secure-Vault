@@ -17,12 +17,10 @@ import oauthLogin from '../../utils/oauthLogin';
 const PATH = process.env.NEXT_PUBLIC_PATH
 const APIPATH = process.env.NEXT_PUBLIC_APIPATH
 
-export default function Form({ name, email='', uat='' }: { name: string, email?: string, uat?: string }) {
-    
+export default function Form( { name, email='', uat='' } : { name: string, email?: string, uat?: string } ) {
     const router = useRouter()
     const {userData, setUserData} = useStateContext()
-    const Submit = async (e: any) => {
-    const { setUserData, userData } = useStateContext()
+    const Submit = async (e: any) => {}
 
     const { data: session, status } = useSession()
 
@@ -47,7 +45,6 @@ export default function Form({ name, email='', uat='' }: { name: string, email?:
         if(name === 'login') {
             const data = await login()
             console.log(data)
-            
             if (data.successful) {
                 console.log('successful');
                 
@@ -61,13 +58,12 @@ export default function Form({ name, email='', uat='' }: { name: string, email?:
                     uat: data.uat
                 }))
             }
-
         } else {
                 
                 const password = document.getElementById('password') as HTMLInputElement
                 const hashedPassword = sha512(password.value).toString()
-                const data = await register(email, hashedPassword, uat)
-                console.log(data);
+                // const data = await register(email, hashedPassword, uat)
+                // console.log(data);
                 
         }
     }
@@ -78,10 +74,8 @@ export default function Form({ name, email='', uat='' }: { name: string, email?:
         password: string;
         hashedpassword: string;
         email: string;
-
     }
     const { register,  control } = useForm<FormInputs>();
-    
 
     return (
         <div className={'wrapper shadow w-3/5 h-1/2 md:w-2/5 lg:w-1/3 xl:w-1/4 2xl:w-1/5 relative ' + styles.wrapper}>
@@ -89,52 +83,44 @@ export default function Form({ name, email='', uat='' }: { name: string, email?:
                 <h2 className="my-8 text-3xl font-normal flex  justify-center relative">
                     {name === 'login' ? 'Zaloguj się' : 'Zarejestruj się'}
                 </h2>
-                <form action="#" className="mx-8 mt-16  ">
-                    {
-                        name === 'login' && <div className=" mt-10 flex flex-col border-b-2 border-black dark:border-white">
-                        <label htmlFor="login" className="text-xl">Login</label>
-                        <input 
-                            type="textarea" 
-                            name="email" id="email"  
-                            placeholder="example@gmail.com"
-                            className={styles.login + " bg-white dark:bg-black"}  
-                        />
-
                 {
-                    name === 'activate' ? (<form onSubmit={Submit} className="mx-8 mt-12 ">
-                    <div className="  mx-5 flex flex-col  gap-1 ">
-                        <Controller
-                            render={({  }) => <TextField {...register("firstName")} id="firstName"label="First Name" variant="standard"/>}
-                            name="firstName"
-                            control={control}
-                            rules={{ required: true }}
-                            defaultValue=""
-                        />
-                        <Controller
-                            render={({  }) => <TextField {...register("lastName")} id="lastname" label="Last Name" variant="standard"/>}
-                            name="lastName"
-                            control={control}
-                            rules={{ required: true }}
-                            defaultValue=""
-                        />
-                        <Controller
-                            render={({ }) => <TextField {...register("password")} id="password" label="Create password" variant="standard" type="password"/>}
-                            name="password"
-                            control={control}
-                            rules={{ required: true }}
-                            defaultValue=""
-                        />
-                        <Controller
-                            render={({  }) => <TextField {...register("hashedpassword")} id="hashedpassword" label="Confirm password" variant="standard" type="password"/>}
-                            name="hashedpassword"
-                            control={control}
-                            rules={{ required: true }}
-                            defaultValue=""
-                        />
-                        {/* <input type="submit" /> */}
-                        <Button variant="outlined" type="submit" className='mt-5'>Wyślij</Button>
-                    </div>)
-                </form>
+                    name === 'activate' ?
+                    (
+                    <form onSubmit={Submit} className="mx-8 mt-12 ">
+                        <div className="  mx-5 flex flex-col  gap-1 ">
+                            <Controller
+                                render={({  }) => <TextField {...register("firstName")} id="firstName"label="First Name" variant="standard"/>}
+                                name="firstName"
+                                control={control}
+                                rules={{ required: true }}
+                                defaultValue=""
+                            />
+                            <Controller
+                                render={({  }) => <TextField {...register("lastName")} id="lastname" label="Last Name" variant="standard"/>}
+                                name="lastName"
+                                control={control}
+                                rules={{ required: true }}
+                                defaultValue=""
+                            />
+                            <Controller
+                                render={({ }) => <TextField {...register("password")} id="password" label="Create password" variant="standard" type="password"/>}
+                                name="password"
+                                control={control}
+                                rules={{ required: true }}
+                                defaultValue=""
+                            />
+                            <Controller
+                                render={({  }) => <TextField {...register("hashedpassword")} id="hashedpassword" label="Confirm password" variant="standard" type="password"/>}
+                                name="hashedpassword"
+                                control={control}
+                                rules={{ required: true }}
+                                defaultValue=""
+                            />
+                            {/* <input type="submit" /> */}
+                            <Button variant="outlined" type="submit" className='mt-5'>Wyślij</Button>
+                        </div>
+                    </form>
+                    )
                     :
                     (
                     <form onSubmit={Submit} className="mx-8 mt-12 flex flex-col">
@@ -161,8 +147,8 @@ export default function Form({ name, email='', uat='' }: { name: string, email?:
                     </form>
                     )
                 }
-            
             </div>
         </div>
     )
 }
+
