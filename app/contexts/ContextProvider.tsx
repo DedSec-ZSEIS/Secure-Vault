@@ -2,6 +2,7 @@
 import { createContext, Dispatch, SetStateAction, useContext, useState, useEffect } from "react";
 
 
+
 interface IStateContext {
     isUserProfileOpen: boolean;
     setIsUserProfileOpen: (value: boolean) => void;
@@ -148,9 +149,11 @@ const StateProvider = ({ children } : { children: React.ReactNode } ) => {
 
     return (
         <StateContext.Provider value={value}>
-            <div className={`h-screen ${theme}`}>
-                {children}
-            </div>
+            
+                <div className={`h-screen ${theme}`}>
+                    {children}
+                </div>
+            
         </StateContext.Provider>
     )
 }
