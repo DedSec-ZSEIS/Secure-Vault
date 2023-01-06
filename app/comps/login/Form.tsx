@@ -85,6 +85,7 @@ export default function Form( { name, email='', uat='' } : { name: string, email
                 {
                     name === 'activate' ?
                     (
+                    <>
                     <form onSubmit={(e) => handleSubmit(e)} className="mx-8 mt-12 ">
                         <div className="  mx-5 flex flex-col  gap-1 ">
                             <Controller
@@ -119,9 +120,11 @@ export default function Form( { name, email='', uat='' } : { name: string, email
                             <Button variant="outlined" type="submit" className='mt-5'>Wyślij</Button>
                         </div>
                     </form>
+                    
+                    </>
                     )
                     :
-                    (
+                    (<>
                     <form onSubmit={(e) => handleSubmit(e)} className="mx-8 mt-12 flex flex-col">
                         <div className=" mt-5 mx-5 flex flex-col  gap-1 ">
                             <Controller
@@ -144,7 +147,10 @@ export default function Form( { name, email='', uat='' } : { name: string, email
                             <Button variant="outlined" type="submit" className='mt-5'>Wyślij</Button>
                         </div>
                     </form>
-                    )
+                    <Button onClick={() => signIn()}>
+                        Sign in with Google
+                    </Button>
+                    </>)
                 }
             </div>
         </div>

@@ -6,6 +6,7 @@ import QuizRoundedIcon from '@mui/icons-material/QuizRounded';
 import { motion as m } from 'framer-motion';
 import Dialog from '@mui/material/Dialog';
 import validateLink from '../../../utils/validateLink';
+import { Typography } from '@mui/material';
 
 export default function Page({ params } : { params: { activateToken: string } }) {
     const { activateToken } = params
@@ -49,7 +50,8 @@ export default function Page({ params } : { params: { activateToken: string } })
       }}
       >
         {
-          isUatValid ? <Form name='activate' email={res.email} uat={res.uat} /> : <h1 className='text-3xl text-center'>Url has expired or doesn't exist. Please ask admin for add your email to the system.</h1>
+          // eslint-disable-next-line react/no-unescaped-entities
+          isUatValid ? <Form name='activate' email={res.email} uat={res.uat} /> : <Typography variant='h3'>Url has expired or doesn't exist. Please ask admin for add your email to the system.</Typography>
         }
       <button 
           className='fixed left-3 bottom-3 size-3 text-3xl z-50'

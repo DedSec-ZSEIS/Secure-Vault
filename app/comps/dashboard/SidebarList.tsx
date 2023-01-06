@@ -1,5 +1,5 @@
-import { ListItemButton, ListItemIcon, ListItemText, List, ListSubheader, styled } from "@mui/material";
-// import { theme } from "../../theme/theme";
+import { ListItemButton, ListItemIcon, ListItemText, List, ListSubheader, styled, Typography } from "@mui/material";
+import FolderIcon from '@mui/icons-material/Folder';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import { useStateContext } from "../../contexts/ContextProvider";
@@ -8,6 +8,7 @@ import Link from "next/link";
 const StyledListItemButton = styled(ListItemButton)(({ theme }) => ({
     borderRadius: "12px",
     backgroundColor: theme.palette.actions?.lightpurple,
+    marginTop: "8px",
 }))
 
 export default function SidebarList() {
@@ -30,7 +31,7 @@ function OpenedList() {
         aria-labelledby="nested-list-subheader"
         subheader={
             <ListSubheader component="div" id="nested-list-subheader" sx={{ background: 'none' }}>
-                Dashboard
+                <Typography variant="subtitle1">Dashboard</Typography>
             </ListSubheader>
         }
     >
@@ -48,6 +49,14 @@ function OpenedList() {
                     <PeopleAltOutlinedIcon />
                 </ListItemIcon>
                 <ListItemText primary="Team" />
+            </StyledListItemButton>
+        </Link>
+        <Link href={`${path}/files`} passHref>
+            <StyledListItemButton>
+                <ListItemIcon>
+                    <FolderIcon />
+                </ListItemIcon>
+                <ListItemText primary="Files" />
             </StyledListItemButton>
         </Link>
     </List>

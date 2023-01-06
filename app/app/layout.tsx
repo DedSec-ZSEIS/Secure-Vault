@@ -10,7 +10,7 @@ interface IProps { children: React.ReactNode, params : { session: Session } }
 
 export default function RootLayout({ children, params }: IProps ) {
   return (
-    <html lang="en"> 
+    <html lang="en" suppressHydrationWarning> 
       <head />
       <body>
           <SessionProvider session={params.session}>

@@ -9,12 +9,12 @@ export default function techHelp({open} : {open: boolean}) {
     e.preventDefault()
     const formData = new FormData(e.currentTarget);
     const searchParams = new URLSearchParams(formData as any);
-    const email = document.getElementById('standard-textarea') as HTMLInputElement | null;
-    const problem = document.getElementById('outlined-basic') as HTMLInputElement | null;
-    const data = {
-      "email": String(email?.value),
-      "problem": String(problem?.value)
-    }
+    // const email = document.getElementById('standard-textarea') as HTMLInputElement | null;
+    // const problem = document.getElementById('outlined-basic') as HTMLInputElement | null;
+    // const data = {
+    //   "email": String(email?.value),
+    //   "problem": String(problem?.value)
+    // }
     
 
     fetch(`http://epickastrona.ddns.net:3001/help`, {

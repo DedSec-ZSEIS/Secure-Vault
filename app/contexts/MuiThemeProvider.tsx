@@ -88,10 +88,12 @@ const darkTheme = {
 
 export default function MuiThemeProvider({ children }: { children: React.ReactNode }) {
     const [darkMode, setDarkMode] = useState<SetStateAction<boolean>>();
-    useEffect(()=>{
-        setDarkMode(localStorage.getItem("darkMode") === "true")
+    
+    // useEffect(()=>{
+    //     // setDarkMode(localStorage.getItem("theme") === "dark")
+    //     console.log("cha");
         
-    },[])
+    // }, [])
     const muiTheme = createTheme(darkMode ? darkTheme : lightTheme)
     return (
         <ThemeProvider theme={muiTheme}>

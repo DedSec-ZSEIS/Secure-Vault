@@ -20,7 +20,7 @@ function Dashboard({ children } : { children: React.ReactNode }) {
 
   
   return (
-      <Suspense fallback={<Loading />}>
+      // <Suspense fallback={<Loading />}>
           <>
             <div className={`bg-white dark:bg-dark-deepblue text-black dark:text-white grid-rows-dashboardLayout ${isMenuOpen ? "grid-cols-dashboardLayoutMenuOpened" : "grid-cols-dashboardLayoutMenuClosed"} gap-0 grid h-full`} style={styles.page}>
               <Sidebar />
@@ -39,7 +39,7 @@ function Dashboard({ children } : { children: React.ReactNode }) {
               </main>
             </div>
       </>
-      </Suspense>
+      // </Suspense>
   )
 }
 
