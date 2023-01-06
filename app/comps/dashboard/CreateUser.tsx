@@ -6,6 +6,7 @@ import { useStateContext } from "../../contexts/ContextProvider"
 export default function CreateUser() {
     const {userData} = useStateContext()
     const APIPATH = process.env.NEXT_PUBLIC_APIPATH
+    const APIKEY = process.env.NEXT_PUBLIC_APIKEY
     const handleSubmit = (e: any) => {
         e.preventDefault()
         const createdEmail = document.getElementById('standard-basic') as HTMLInputElement | null;
@@ -20,6 +21,7 @@ export default function CreateUser() {
             method: 'POST',
             headers:    {
                 "Content-Type": "application/json; charset=UTF-8",
+                "api-key": (`${APIKEY}`)
                 },
             body: JSON.stringify(data),
             

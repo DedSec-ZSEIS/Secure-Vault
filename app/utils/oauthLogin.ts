@@ -2,7 +2,7 @@
 
 export default async function oauthLogin (email: string) {
     const APIPATH = process.env.NEXT_PUBLIC_APIPATH
-    const API_KEY = process.env.API_KEY
+    const APIKEY = process.env.NEXT_PUBLIC_APIKEY
     // const res = await axios({
     //     method: 'post',
     //     url: `${APIPATH}oauthLogin`,
@@ -21,7 +21,7 @@ export default async function oauthLogin (email: string) {
     const headers = {
         'Content-Type': 'application/json',
         // "Access-Control-Allow-Origin": "*", // Required for CORS support to work,
-        "api-key": String(API_KEY),
+        "api-key": (`${APIKEY}`),
     }
     console.log(headers);
     

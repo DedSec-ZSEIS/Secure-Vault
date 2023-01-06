@@ -1,9 +1,10 @@
 const APIPATH = process.env.NEXT_PUBLIC_APIPATH
+const APIKEY = process.env.NEXT_PUBLIC_APIKEY
 
 export default async function removeUsers(email: string, uat: string, userIds: number[]) {
     const sendData = {
         method: "POST",
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json',"api-key": (`${APIKEY}`) },
         body: JSON.stringify({
             "email": email,
             "uat": uat, 
