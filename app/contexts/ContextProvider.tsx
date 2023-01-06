@@ -135,6 +135,17 @@ const StateProvider = ({ children } : { children: React.ReactNode } ) => {
         setUserData,
     }
 
+    useEffect(() => {
+        if (isDarkMode) {
+            localStorage.setItem("theme", "dark")
+        }
+        else {
+            localStorage.setItem("theme", "light")
+        }
+        localStorage.setItem("isMenuOpen", JSON.stringify(isMenuOpen))
+        sessionStorage.setItem("userData", JSON.stringify(userData))
+    }, [ theme, userData, isDarkMode, isMenuOpen ])
+
     return (
         <StateContext.Provider value={value}>
             <div className={`h-screen ${theme}`}>

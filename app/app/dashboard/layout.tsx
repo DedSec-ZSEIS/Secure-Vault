@@ -9,11 +9,11 @@ export default function Layout({ children } : { children: React.ReactNode }) {
   const { userData } = useStateContext()
 
 
- useEffect(() => {
-  if (!userData) {
-    router.push("/login")
-  }
- }, [])
+//  useEffect(() => {
+//   if (!userData) {
+//     router.push("/login")
+//   }
+//  }, [])
 
  
 

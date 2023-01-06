@@ -1,5 +1,6 @@
 "use client"
 import { ThemeProvider, colors, createTheme } from "@mui/material";
+import { SetStateAction, useEffect, useState } from "react";
 import { useStateContext } from "./ContextProvider";
 
 
@@ -86,7 +87,11 @@ const darkTheme = {
 
 
 export default function MuiThemeProvider({ children }: { children: React.ReactNode }) {
-    const darkMode = localStorage.getItem("darkMode") === "true";
+    const [darkMode, setDarkMode] = useState<SetStateAction<boolean>>();
+    useEffect(()=>{
+        setDarkMode(localStorage.getItem("darkMode") === "true")
+        
+    },[])
     const muiTheme = createTheme(darkMode ? darkTheme : lightTheme)
     return (
         <ThemeProvider theme={muiTheme}>

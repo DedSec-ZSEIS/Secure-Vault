@@ -18,20 +18,20 @@ export default function Form({ name, email='', uat='' }: { name: string, email?:
     const { data: session, status } = useSession()
 
     
-    useEffect(() => {
-        if (session) {
-            const data = oauthLogin(session?.user?.email)
-            console.log(data);
-            if (!data) {
-                alert("Nie udało się zalogować")
-            } else {
-                setUserData({
-                    email: data.email,
-                    uat: data.uat,
-                })
-            }
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (session) {
+    //         const data = oauthLogin(session?.user?.email)
+    //         console.log(data);
+    //         if (!data) {
+    //             alert("Nie udało się zalogować")
+    //         } else {
+    //             setUserData({
+    //                 email: data.email,
+    //                 uat: data.uat,
+    //             })
+    //         }
+    //     }
+    // }, [])
 
     const handleSubmit = async (e: any) => {
         e.preventDefault()
