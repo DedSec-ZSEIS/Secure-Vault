@@ -20,7 +20,6 @@ const APIPATH = process.env.NEXT_PUBLIC_APIPATH
 export default function Form( { name, email='', uat='' } : { name: string, email?: string, uat?: string } ) {
     const router = useRouter()
     const {userData, setUserData} = useStateContext()
-    const Submit = async (e: any) => {}
 
     const { data: session, status } = useSession()
 
@@ -86,7 +85,7 @@ export default function Form( { name, email='', uat='' } : { name: string, email
                 {
                     name === 'activate' ?
                     (
-                    <form onSubmit={Submit} className="mx-8 mt-12 ">
+                    <form onSubmit={(e) => handleSubmit(e)} className="mx-8 mt-12 ">
                         <div className="  mx-5 flex flex-col  gap-1 ">
                             <Controller
                                 render={({  }) => <TextField {...register("firstName")} id="firstName"label="First Name" variant="standard"/>}
@@ -123,10 +122,10 @@ export default function Form( { name, email='', uat='' } : { name: string, email
                     )
                     :
                     (
-                    <form onSubmit={Submit} className="mx-8 mt-12 flex flex-col">
+                    <form onSubmit={(e) => handleSubmit(e)} className="mx-8 mt-12 flex flex-col">
                         <div className=" mt-5 mx-5 flex flex-col  gap-1 ">
                             <Controller
-                                render={({ field }) => <TextField {...field} id="email"label="E-mail" variant="standard"/>}
+                                render={({ field }) => <TextField {...register("email")} id="email"label="E-mail" variant="standard"/>}
                                 name="email"
                                 control={control}
                                 rules={{ required: true }}
@@ -134,7 +133,7 @@ export default function Form( { name, email='', uat='' } : { name: string, email
                             />
                             
                             <Controller
-                                render={({ field }) => <TextField {...field} id="password" label="password" variant="standard" type="password"/>}
+                                render={({ field }) => <TextField {...register("password")} id="password" label="password" variant="standard" type="password"/>}
                                 name="password"
                                 control={control}
                                 rules={{ required: true }}
