@@ -1,11 +1,13 @@
-export default async function register (email: string, password: string, uat: string, name="dupa") {
+export default async function registerUser(email: string, password: string, uat: string, firstname: string, lastname: string) {
     const APIPATH = process.env.NEXT_PUBLIC_APIPATH
     const APIKEY = process.env.NEXT_PUBLIC_APIKEY
+    const fullname = String(firstname + " " + lastname)
+    
     const sendData = {
         "email": String(email),
         "newPass": String(password),
         "uat": String(uat),
-        "newFullName": String(name)
+        "newFullName": String(fullname)
     }
     console.log(sendData);
     

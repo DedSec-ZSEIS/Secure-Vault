@@ -19,6 +19,7 @@ export default function UsersList() {
         fullName: string;
         dbSpaceTaken: number;
         admin: boolean;
+        status: string;
     }
 
     const [users, setUsers] = useState<IUser[]>([])
@@ -57,6 +58,7 @@ export default function UsersList() {
                 dbSpaceAllocated: user?.dbSpaceAllocated,
                 dbSpaceUsed: user?.dbSpaceTaken,
                 role: user?.admin ? 'Admin' : 'User',
+                status: user?.status
             }
         }))
     }, [users])
@@ -81,11 +83,14 @@ export default function UsersList() {
     const UserProfile = () => {
         const i = 0
         const getFullName = (i: number) => {
-            let fullname = ''
+            let fullname = ''    
             if (formattedUsers[i].name) fullname += formattedUsers[i].name
             if (formattedUsers[i].surname) fullname += ` ${formattedUsers[i].surname}`
             return fullname
         }
+        
+        
+
         return (
             <div className="flex gap-1">
                 <div className="flex-1">
@@ -105,7 +110,7 @@ export default function UsersList() {
         // { field: 'name', headerName: 'Imie', width: 150 },
         // { field: 'surname', headerName: 'Nazwisko', width: 150 },
         // { field: 'email', headerName: 'Email', width: 150 },
-        { field: 'userProfile', headerName: 'Profil', width: 150, renderCell: () => <UserProfile />, disableColumnMenu: true, sortable: false, align: "center" },
+        { field: 'userProfile', headerName: 'Użytkownik', width: 150, renderCell: () => <UserProfile />, disableColumnMenu: true, sortable: false, align: "center" },
         { field: 'dbSpaceAllocated', headerName: 'Przydzielone miejsce', width: 150 },
         { field: 'dbSpaceUsed', headerName: 'Zużyte miejsce', width: 150 },
         { field: 'role', headerName: 'Rola', width: 150 }, // this will be custom renderCell() and label will be "admin" or "user". defaultly set to what received from api
@@ -123,6 +128,7 @@ export default function UsersList() {
         dbSpaceAllocated: number,
         dbSpaceUsed: number,
         role: string,
+        status: string
     }
 
     

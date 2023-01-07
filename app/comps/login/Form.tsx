@@ -6,7 +6,7 @@ import sha512 from 'crypto-js/sha512';
 import { useRouter } from 'next/navigation'
 import { useStateContext } from "../../contexts/ContextProvider"
 import login from '../../utils/login';
-import register from '../../utils/register';
+import registerUser from '../../utils/registerUser';
 // import { useEffect } from 'react';
 import {useForm, Controller} from 'react-hook-form'
 import TextField from '@mui/material/TextField';
@@ -58,11 +58,16 @@ export default function Form( { name, email='', uat='' } : { name: string, email
                 }))
             }
         } else {
+                const firstName = document.getElementById('firstName') as HTMLInputElement
+                const lastName = document.getElementById('lastName') as HTMLInputElement
+                
+                
+
                 
                 const password = document.getElementById('password') as HTMLInputElement
                 const hashedPassword = sha512(password.value).toString()
-                // const data = await register(email, hashedPassword, uat)
-                // console.log(data);
+                const data = await registerUser(email, hashedPassword, uat,firstName.value, lastName.value)
+                console.log(data);
                 
         }
     }
@@ -96,7 +101,7 @@ export default function Form( { name, email='', uat='' } : { name: string, email
                                 defaultValue=""
                             />
                             <Controller
-                                render={({  }) => <TextField {...register("lastName")} id="lastname" label="Last Name" variant="standard"/>}
+                                render={({  }) => <TextField {...register("lastName")} id="lastName" label="Last Name" variant="standard"/>}
                                 name="lastName"
                                 control={control}
                                 rules={{ required: true }}
